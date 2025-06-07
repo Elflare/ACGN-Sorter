@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏排序系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* All CSS from the original file is placed here, no changes needed */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .phase {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        #add-phase {
+            text-align: center;
+        }
+        
+        .game-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .form-group {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #00c6ff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .cover-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .cover-option {
+            width: 100%;
+            max-width: 300px;
+            position: relative;
+        }
+        
+        .cover-upload {
+            width: 100%;
+            height: 150px;
+            border-radius: 15px;
+            border: 3px dashed #666;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .cover-upload:hover {
+            border-color: #00c6ff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .cover-upload i {
+            font-size: 3rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .cover-upload span {
+            font-size: 0.9rem;
+            color: #999;
+            text-align: center;
+            padding: 0 10px;
+        }
+        
+        #cover-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .cancel-upload {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            color: white;
+            font-weight: bold;
+            display: none;
+        }
+        
+        .cancel-upload:hover {
+            background: rgba(255, 0, 0, 0.9);
+        }
+        
+        .url-preview-container {
+            margin-top: 10px;
+            width: 100%;
+            height: 150px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            display: none;
+        }
+        
+        .url-preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .preview-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 1rem;
+            display: none;
+        }
+        
+        .preview-error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.5);
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            padding: 10px;
+            text-align: center;
+            display: none;
+        }
+        
+        .url-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .url-input-group input {
+            flex: 1;
+        }
+        
+        .preview-btn {
+            padding: 14px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .preview-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        #add-game-btn {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
+            margin-top: 10px;
+        }
+        
+        #add-game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+        }
+        
+        .games-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .game-card {
+            width: 160px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .game-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-bottom: 2px solid #00c6ff;
+        }
+        
+        .game-card .default-cover {
+            width: 100%;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2c2c2c;
+            border-bottom: 2px solid #00c6ff;
+        }
+        
+        .game-card .default-cover i {
+            font-size: 4rem;
+            color: #555;
+        }
+        
+        .game-card .name {
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .game-card:hover .delete-btn {
+            opacity: 1;
+        }
+        
+        .delete-btn i {
+            font-size: 14px;
+        }
+        
+        .actions {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .primary-btn {
+            background: linear-gradient(to right, #ff8a00, #e52e71);
+            color: white;
+            box-shadow: 0 5px 15px rgba(229, 46, 113, 0.4);
+        }
+        
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .tertiary-btn {
+            background: rgba(108, 117, 125, 0.5);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .primary-btn:hover {
+            box-shadow: 0 8px 20px rgba(229, 46, 113, 0.6);
+        }
+        
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .comparison-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .comparison-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .comparison-subtitle {
+            text-align: center;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .games-comparison {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        .game-option {
+            width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .game-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .game-option:active {
+            transform: translateY(-5px);
+        }
+        
+        .game-option .image-container {
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid #00c6ff;
+        }
+        
+        .game-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .game-option .default-cover {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2c2c2c;
+        }
+        
+        .game-option .default-cover i {
+            font-size: 5rem;
+            color: #555;
+        }
+        
+        .game-option .name {
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .vs-text {
+            display: flex;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #00c6ff;
+            text-shadow: 0 0 10px rgba(0, 198, 255, 0.7);
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        
+        .progress-text {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .comparison-info {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        .results-container {
+            text-align: center;
+        }
+        
+        .results-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .results-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .ranking-list {
+            max-width: 700px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px 25px;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .ranking-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .rank {
+            font-size: 1.8rem;
+            font-weight: 800;
+            width: 60px;
+            text-align: center;
+            color: #00c6ff;
+        }
+        
+        .rank-1 { color: #ffd700; }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
+        
+        .game-cover {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 20px;
+            border: 2px solid #00c6ff;
+            flex-shrink: 0;
+        }
+        
+        .game-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .game-cover .default-cover {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2c2c2c;
+        }
+        
+        .game-cover .default-cover i {
+            font-size: 2rem;
+            color: #555;
+        }
+        
+        .game-info {
+            flex-grow: 1;
+        }
+        
+        .game-info .name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 2.2rem; }
+            .games-comparison { gap: 20px; }
+            .game-option { width: calc(50% - 20px); }
+            .vs-text { font-size: 1.8rem; }
+            .ranking-item { padding: 12px 15px; }
+            .game-cover { width: 50px; height: 50px; margin: 0 10px; }
+            .game-info .name { font-size: 1.2rem; }
+            .btn { padding: 12px 25px; font-size: 1rem; }
+            .url-input-group { flex-direction: column; }
+            .url-input-group input { width: 100%; }
+            .preview-btn { width: 100%; padding: 12px; }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .game-option { width: 100%; }
+            .vs-text { display: none; }
+            .ranking-item { padding: 10px; }
+            .rank { font-size: 1.5rem; width: 40px; }
+            .cover-options { flex-direction: column; align-items: center; }
+            .cover-option { width: 100%; max-width: 100%; }
+        }
+        
+        .tutorial {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            border-left: 4px solid #00c6ff;
+        }
+        
+        .tutorial h3 {
+            margin-bottom: 15px;
+            color: #00c6ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tutorial ul { padding-left: 20px; }
+        .tutorial li { margin-bottom: 10px; line-height: 1.5; }
+        .tutorial i { color: #00c6ff; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>游戏排序系统</h1>
+        <p class="subtitle">添加你喜爱的游戏，通过两两比较得出最终排名</p>
+    </header>
+    
+    <div class="container">
+        <div id="add-phase" class="phase active">
+            <div class="tutorial">
+                <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 添加游戏：输入游戏名称，并上传封面或使用外链图片</li>
+                    <li><i class="fas fa-check-circle"></i> 封面可选：不添加封面将使用默认图标</li>
+                    <li><i class="fas fa-check-circle"></i> 本地存储：所有数据保存在浏览器中，刷新页面不会丢失</li>
+                    <li><i class="fas fa-check-circle"></i> 排序阶段：系统会展示两个游戏，选择你更喜欢的游戏</li>
+                    <li><i class="fas fa-check-circle"></i> 查看结果：完成所有比较后，系统会生成最终排名</li>
+                    <li><i class="fas fa-check-circle"></i> Powered by DeepSeek R1 & Gemini 2.5 pro</li>
+                </ul>
+            </div>
+            
+            <div class="game-form">
+                <div class="form-group">
+                    <label for="game-name">游戏名称 *</label>
+                    <input type="text" id="game-name" placeholder="输入游戏名称">
+                </div>
+                
+                <div class="cover-options">
+                    <div class="cover-option">
+                        <label>上传封面</label>
+                        <div class="cover-upload" id="cover-upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>点击上传图片或拖放文件到此处</span>
+                            <img id="cover-preview" alt="封面预览">
+                            <div class="cancel-upload" id="cancel-upload">×</div>
+                            <input type="file" id="cover-input" accept="image/*" style="display: none">
+                        </div>
+                    </div>
+                    
+                    <div class="cover-option">
+                        <label>或使用图片链接</label>
+                        <div class="url-input-group">
+                            <input type="text" id="cover-url" placeholder="输入封面图片URL">
+                            <button class="preview-btn" id="preview-url-btn">预览</button>
+                        </div>
+                        <div class="url-preview-container">
+                            <img class="url-preview-image" id="url-preview-image" alt="URL图片预览">
+                            <div class="preview-loading" id="preview-loading">
+                                <i class="fas fa-spinner fa-spin"></i> 图片加载中...
+                            </div>
+                            <div class="preview-error" id="preview-error">
+                                图片加载失败，请检查URL
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="add-game-btn">添加游戏</button>
+            </div>
+            
+            <div class="games-list" id="games-list">
+                </div>
+            
+            <div class="actions">
+                <button id="start-sorting-btn" class="btn primary-btn" disabled>开始排序</button>
+                <button id="reset-btn" class="btn secondary-btn">重置所有</button>
+                 <a href="index.html" class="btn tertiary-btn">返回首页</a>
+            </div>
+        </div>
+        
+        <div id="compare-phase" class="phase">
+            <div class="comparison-container">
+                <h2 class="comparison-title">你更喜欢哪个游戏？</h2>
+                <p class="comparison-subtitle">点击选择你更喜欢的游戏</p>
+                
+                <div class="games-comparison">
+                    <div class="game-option" id="option1">
+                        <div class="image-container">
+                            <div class="default-cover">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                        </div>
+                        <div class="name">游戏1</div>
+                    </div>
+                    
+                    <div class="vs-text">VS</div>
+                    
+                    <div class="game-option" id="option2">
+                        <div class="image-container">
+                            <div class="default-cover">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                        </div>
+                        <div class="name">游戏2</div>
+                    </div>
+                </div>
+                
+                <div class="comparison-info">
+                    当前进度: <span id="current-comparison">1</span>/<span id="total-comparisons">0</span> 次比较
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-text">比较进度: <span id="progress-text">0</span>%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="result-phase" class="phase">
+            <div class="results-container">
+                <h2 class="results-title">游戏排序结果</h2>
+                <p class="results-subtitle">根据你的选择，以下是游戏喜爱度排名</p>
+                
+                <div class="ranking-list" id="ranking-list">
+                    </div>
+                
+                <div class="actions">
+                    <button id="restart-btn" class="btn primary-btn">重新开始</button>
+                    <button id="back-to-add-btn" class="btn secondary-btn">返回修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Global variables
+        let games = JSON.parse(localStorage.getItem('games')) || [];
+        let sortedGames = [];
+        let comparisonCount = 0;
+        let currentComparisonIndex = 0;
+        let totalComparisons = 0;
+
+        // DOM elements
+        const addPhase = document.getElementById('add-phase');
+        const comparePhase = document.getElementById('compare-phase');
+        const resultPhase = document.getElementById('result-phase');
+        const gamesList = document.getElementById('games-list');
+        const gameNameInput = document.getElementById('game-name');
+        const coverInput = document.getElementById('cover-input');
+        const coverUrlInput = document.getElementById('cover-url');
+        const coverPreview = document.getElementById('cover-preview');
+        const coverUploadArea = document.getElementById('cover-upload-area');
+        const cancelUploadBtn = document.getElementById('cancel-upload');
+        const addGameBtn = document.getElementById('add-game-btn');
+        const startSortingBtn = document.getElementById('start-sorting-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const option1 = document.getElementById('option1');
+        const option2 = document.getElementById('option2');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const currentComparisonSpan = document.getElementById('current-comparison');
+        const totalComparisonsSpan = document.getElementById('total-comparisons');
+        const rankingList = document.getElementById('ranking-list');
+        const restartBtn = document.getElementById('restart-btn');
+        const backToAddBtn = document.getElementById('back-to-add-btn');
+        const previewUrlBtn = document.getElementById('preview-url-btn');
+        const urlPreviewContainer = document.querySelector('.url-preview-container');
+        const urlPreviewImage = document.getElementById('url-preview-image');
+        const previewLoading = document.getElementById('preview-loading');
+        const previewError = document.getElementById('preview-error');
+
+        // Initialize page
+        renderGameList();
+        updateStartButtonState();
+
+        // Cover upload handling
+        coverUploadArea.addEventListener('click', () => {
+            coverInput.click();
+        });
+
+        // Drag and drop upload
+        coverUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            coverUploadArea.style.borderColor = '#00c6ff';
+            coverUploadArea.style.background = 'rgba(0, 198, 255, 0.1)';
+        });
+
+        coverUploadArea.addEventListener('dragleave', () => {
+            coverUploadArea.style.borderColor = '#666';
+            coverUploadArea.style.background = 'rgba(255, 255, 255, 0.05)';
+        });
+
+        coverUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            coverUploadArea.style.borderColor = '#666';
+            coverUploadArea.style.background = 'rgba(255, 255, 255, 0.05)';
+
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                const file = e.dataTransfer.files[0];
+                if (file.type.match('image.*')) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        coverPreview.src = e.target.result;
+                        coverPreview.style.display = 'block';
+                        coverUploadArea.querySelector('i').style.display = 'none';
+                        coverUploadArea.querySelector('span').style.display = 'none';
+                        cancelUploadBtn.style.display = 'block';
+                    }
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        coverInput.addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    coverPreview.src = e.target.result;
+                    coverPreview.style.display = 'block';
+                    coverUploadArea.querySelector('i').style.display = 'none';
+                    coverUploadArea.querySelector('span').style.display = 'none';
+                    cancelUploadBtn.style.display = 'block';
+                    hideUrlPreview();
+                }
+
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // Cancel upload
+        cancelUploadBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            coverPreview.src = '';
+            coverPreview.style.display = 'none';
+            coverInput.value = '';
+            coverUploadArea.querySelector('i').style.display = 'block';
+            coverUploadArea.querySelector('span').style.display = 'block';
+            cancelUploadBtn.style.display = 'none';
+        });
+
+        // URL preview
+        previewUrlBtn.addEventListener('click', function() {
+            const url = coverUrlInput.value.trim();
+            if (!url) return;
+
+            urlPreviewContainer.style.display = 'block';
+            urlPreviewImage.style.display = 'none';
+            previewError.style.display = 'none';
+            previewLoading.style.display = 'flex';
+
+            const tempImage = new Image();
+            tempImage.onload = function() {
+                urlPreviewImage.src = url;
+                urlPreviewImage.style.display = 'block';
+                previewLoading.style.display = 'none';
+                previewError.style.display = 'none';
+
+                coverPreview.style.display = 'none';
+                cancelUploadBtn.style.display = 'none';
+                coverUploadArea.querySelector('i').style.display = 'block';
+                coverUploadArea.querySelector('span').style.display = 'block';
+                coverInput.value = '';
+            };
+
+            tempImage.onerror = function() {
+                previewLoading.style.display = 'none';
+                previewError.style.display = 'flex';
+                urlPreviewImage.style.display = 'none';
+            };
+            tempImage.src = url;
+        });
+
+        function hideUrlPreview() {
+            urlPreviewContainer.style.display = 'none';
+            urlPreviewImage.style.display = 'none';
+            previewLoading.style.display = 'none';
+            previewError.style.display = 'none';
+        }
+
+        // Add game
+        addGameBtn.addEventListener('click', function() {
+            const name = gameNameInput.value.trim();
+            if (!name) {
+                alert('请输入游戏名称');
+                return;
+            }
+
+            let cover = '';
+            if (coverPreview.style.display === 'block') {
+                cover = coverPreview.src;
+            } else if (urlPreviewImage.style.display === 'block') {
+                cover = urlPreviewImage.src;
+            } else if (coverUrlInput.value.trim()) {
+                cover = coverUrlInput.value.trim();
+            }
+
+            games.push({
+                id: Date.now(),
+                name: name,
+                cover: cover,
+                wins: 0
+            });
+
+            localStorage.setItem('games', JSON.stringify(games));
+
+            gameNameInput.value = '';
+            coverPreview.style.display = 'none';
+            coverPreview.src = '';
+            coverUrlInput.value = '';
+            coverUploadArea.querySelector('i').style.display = 'block';
+            coverUploadArea.querySelector('span').style.display = 'block';
+            cancelUploadBtn.style.display = 'none';
+            hideUrlPreview();
+
+            renderGameList();
+            updateStartButtonState();
+        });
+
+        // Start sorting
+        startSortingBtn.addEventListener('click', function() {
+            if (games.length < 2) {
+                alert('至少需要添加两个游戏才能排序');
+                return;
+            }
+
+            sortedGames = [games[0]];
+            comparisonCount = 0;
+            currentComparisonIndex = 0;
+            totalComparisons = (games.length * (games.length - 1)) / 2;
+            totalComparisonsSpan.textContent = totalComparisons;
+
+            addPhase.classList.remove('active');
+            comparePhase.classList.add('active');
+
+            nextComparison();
+        });
+
+        // Reset button
+        resetBtn.addEventListener('click', function() {
+            if (confirm('确定要删除所有游戏吗？此操作不可撤销。')) {
+                games = [];
+                localStorage.removeItem('games');
+                renderGameList();
+                updateStartButtonState();
+            }
+        });
+
+        // Comparison choice
+        option1.addEventListener('click', () => handleComparisonChoice(0));
+        option2.addEventListener('click', () => handleComparisonChoice(1));
+        
+        // Restart
+        restartBtn.addEventListener('click', function() {
+            resultPhase.classList.remove('active');
+            addPhase.classList.add('active');
+            games.forEach(game => game.wins = 0);
+            localStorage.setItem('games', JSON.stringify(games));
+        });
+
+        // Back to add
+        backToAddBtn.addEventListener('click', function() {
+            resultPhase.classList.remove('active');
+            addPhase.classList.add('active');
+        });
+
+        // Helper: Render game list
+        function renderGameList() {
+            gamesList.innerHTML = '';
+
+            if (games.length === 0) {
+                gamesList.innerHTML = '<p style="text-align:center; opacity:0.7; padding:30px;">还没有添加任何游戏</p>';
+                return;
+            }
+
+            games.forEach((game, index) => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    ${game.cover ? 
+                        `<img src="${game.cover}" alt="${game.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'default-cover\'><i class=\'fas fa-gamepad\'></i></div>'">` : 
+                        `<div class="default-cover"><i class="fas fa-gamepad"></i></div>`
+                    }
+                    <div class="name">${game.name}</div>
+                    <div class="delete-btn" data-index="${index}">
+                        <i class="fas fa-times"></i>
+                    </div>
+                `;
+                gamesList.appendChild(card);
+
+                const deleteBtn = card.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const index = parseInt(this.getAttribute('data-index'));
+                    games.splice(index, 1);
+                    localStorage.setItem('games', JSON.stringify(games));
+                    renderGameList();
+                    updateStartButtonState();
+                });
+            });
+        }
+
+        // Helper: Update start button state
+        function updateStartButtonState() {
+            startSortingBtn.disabled = games.length < 2;
+        }
+
+        // Helper: Next comparison
+        function nextComparison() {
+            const progress = Math.round((comparisonCount / totalComparisons) * 100);
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = progress;
+            currentComparisonSpan.textContent = comparisonCount + 1;
+
+            if (sortedGames.length === games.length) {
+                finishSorting();
+                return;
+            }
+
+            const nextGame = games[sortedGames.length];
+            currentComparisonIndex = sortedGames.length - 1;
+
+            updateGameOption(option1, nextGame);
+            updateGameOption(option2, sortedGames[currentComparisonIndex]);
+        }
+
+        // Helper: Update comparison option
+        function updateGameOption(optionElement, game) {
+            const imageContainer = optionElement.querySelector('.image-container');
+            const nameElement = optionElement.querySelector('.name');
+            nameElement.textContent = game.name;
+
+            if (game.cover) {
+                imageContainer.innerHTML = `<img src="${game.cover}" alt="${game.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'default-cover\'><i class=\'fas fa-gamepad\'></i></div>'">`;
+            } else {
+                imageContainer.innerHTML = `<div class="default-cover"><i class="fas fa-gamepad"></i></div>`;
+            }
+        }
+
+        // Helper: Handle comparison choice
+        function handleComparisonChoice(winnerIndex) {
+            comparisonCount++;
+
+            const newGame = games[sortedGames.length];
+            const existingGame = sortedGames[currentComparisonIndex];
+
+            if (winnerIndex === 0) {
+                if (currentComparisonIndex === 0) {
+                    sortedGames.unshift(newGame);
+                    nextComparison();
+                } else {
+                    currentComparisonIndex--;
+                    updateGameOption(option2, sortedGames[currentComparisonIndex]);
+                }
+            } else {
+                sortedGames.splice(currentComparisonIndex + 1, 0, newGame);
+                nextComparison();
+            }
+        }
+
+        // Helper: Finish sorting
+        function finishSorting() {
+            renderRankingList(sortedGames);
+            comparePhase.classList.remove('active');
+            resultPhase.classList.add('active');
+        }
+
+        // Helper: Render ranking list
+        function renderRankingList(sortedGames) {
+            rankingList.innerHTML = '';
+
+            sortedGames.forEach((game, index) => {
+                const rankClass = index === 0 ? 'rank-1' :
+                                  index === 1 ? 'rank-2' :
+                                  index === 2 ? 'rank-3' : '';
+                const item = document.createElement('div');
+                item.className = 'ranking-item';
+                item.innerHTML = `
+                    <div class="rank ${rankClass}">${index + 1}</div>
+                    <div class="game-cover">
+                        ${game.cover ? 
+                            `<img src="${game.cover}" alt="${game.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\'default-cover\'><i class=\'fas fa-gamepad\'></i></div>'">` : 
+                            `<div class="default-cover"><i class="fas fa-gamepad"></i></div>`
+                        }
+                    </div>
+                    <div class="game-info">
+                        <div class="name">${game.name}</div>
+                    </div>
+                `;
+                rankingList.appendChild(item);
+            });
+        }
+    });
+    </script>
+</body>
+</html>
