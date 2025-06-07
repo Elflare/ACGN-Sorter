@@ -101,7 +101,8 @@
             font-weight: 500;
         }
 
-        .form-group input {
+        .form-group input,
+        .url-input-group input {
             width: 100%;
             padding: 14px;
             border-radius: 10px;
@@ -112,7 +113,8 @@
             transition: all 0.3s;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .url-input-group input:focus {
             outline: none;
             border-color: #00c6ff;
             background: rgba(255, 255, 255, 0.15);
@@ -255,20 +257,6 @@
             flex: 1;
         }
 
-        .preview-btn {
-            padding: 14px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .preview-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
 
         #add-game-btn {
             background: linear-gradient(to right, #00c6ff, #0072ff);
@@ -879,7 +867,6 @@
                         <label>或使用图片链接</label>
                         <div class="url-input-group">
                             <input type="text" id="cover-url" placeholder="输入封面图片URL">
-                            <button class="preview-btn" id="preview-url-btn">预览</button>
                         </div>
                         <div class="url-preview-container">
                             <img class="url-preview-image" id="url-preview-image" alt="URL图片预览">
@@ -954,7 +941,8 @@
                 <div class="ranking-list" id="ranking-list">
                 </div>
                 <div class="prompt-container">
-                    <h3>请求锐评（复制并发送给 AI）<button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> 复制</button></h3>
+                    <h3>请求锐评（复制并发送给 AI）<button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> 复制</button>
+                    </h3>
                     <textarea id="prompt-output" readonly onclick="this.select();"></textarea>
                 </div>
                 <div class="actions">
@@ -973,7 +961,7 @@
             let comparisonCount = 0;
             let currentComparisonIndex = 0;
             let totalComparisons = 0;
-
+            let debounceTimer;
             // DOM elements
             const resizerCanvas = document.getElementById('image-resizer-canvas');
             const addPhase = document.getElementById('add-phase');
@@ -998,7 +986,6 @@
             const rankingList = document.getElementById('ranking-list');
             const restartBtn = document.getElementById('restart-btn');
             const backToAddBtn = document.getElementById('back-to-add-btn');
-            const previewUrlBtn = document.getElementById('preview-url-btn');
             const urlPreviewContainer = document.querySelector('.url-preview-container');
             const urlPreviewImage = document.getElementById('url-preview-image');
             const previewLoading = document.getElementById('preview-loading');
@@ -1108,35 +1095,43 @@
             });
 
             // URL preview
-            previewUrlBtn.addEventListener('click', function () {
+            // 添加以下新的自动预览事件
+            coverUrlInput.addEventListener('input', function () {
+                clearTimeout(debounceTimer);
                 const url = coverUrlInput.value.trim();
-                if (!url) return;
 
-                urlPreviewContainer.style.display = 'block';
-                urlPreviewImage.style.display = 'none';
-                previewError.style.display = 'none';
-                previewLoading.style.display = 'flex';
+                if (!url) {
+                    hideUrlPreview();
+                    return;
+                }
 
-                const tempImage = new Image();
-                tempImage.onload = function () {
-                    urlPreviewImage.src = url;
-                    urlPreviewImage.style.display = 'block';
-                    previewLoading.style.display = 'none';
-                    previewError.style.display = 'none';
-
-                    coverPreview.style.display = 'none';
-                    cancelUploadBtn.style.display = 'none';
-                    coverUploadArea.querySelector('i').style.display = 'block';
-                    coverUploadArea.querySelector('span').style.display = 'block';
-                    coverInput.value = '';
-                };
-
-                tempImage.onerror = function () {
-                    previewLoading.style.display = 'none';
-                    previewError.style.display = 'flex';
+                debounceTimer = setTimeout(() => {
+                    urlPreviewContainer.style.display = 'block';
                     urlPreviewImage.style.display = 'none';
-                };
-                tempImage.src = url;
+                    previewError.style.display = 'none';
+                    previewLoading.style.display = 'flex';
+
+                    const tempImage = new Image();
+                    tempImage.onload = function () {
+                        urlPreviewImage.src = url;
+                        urlPreviewImage.style.display = 'block';
+                        previewLoading.style.display = 'none';
+                        previewError.style.display = 'none';
+
+                        coverPreview.style.display = 'none';
+                        cancelUploadBtn.style.display = 'none';
+                        coverUploadArea.querySelector('i').style.display = 'block';
+                        coverUploadArea.querySelector('span').style.display = 'block';
+                        coverInput.value = '';
+                    };
+
+                    tempImage.onerror = function () {
+                        previewLoading.style.display = 'none';
+                        previewError.style.display = 'flex';
+                        urlPreviewImage.style.display = 'none';
+                    };
+                    tempImage.src = url;
+                }, 500); // 延迟500毫秒触发，防止频繁请求
             });
 
             function hideUrlPreview() {
