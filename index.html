@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             color: #fff;
@@ -23,10 +25,12 @@
             justify-content: center;
             text-align: center;
         }
+
         .main-container {
             max-width: 800px;
             width: 100%;
         }
+
         h1 {
             font-size: 3.5rem;
             margin-bottom: 15px;
@@ -35,17 +39,20 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .subtitle {
             font-size: 1.4rem;
             opacity: 0.9;
             margin-bottom: 50px;
         }
+
         .selection-container {
             display: flex;
             justify-content: center;
             gap: 40px;
             flex-wrap: wrap;
         }
+
         .selection-card {
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
@@ -57,41 +64,61 @@
             color: #fff;
             transition: all 0.3s ease;
         }
+
         .selection-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
         }
+
         .selection-card i {
             font-size: 4rem;
             margin-bottom: 20px;
             display: block;
         }
+
         .selection-card .icon-character {
-             background: linear-gradient(to right, #ff8a00, #e52e71);
+            background: linear-gradient(to right, #ff8a00, #e52e71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .selection-card .icon-game {
             background: linear-gradient(to right, #00c6ff, #0072ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .selection-card h2 {
             font-size: 1.8rem;
             margin-bottom: 10px;
         }
+
         .selection-card p {
             font-size: 1rem;
             opacity: 0.8;
         }
+
         @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .subtitle { font-size: 1.2rem; }
-            .selection-container { gap: 20px; }
-            .selection-card { width: 100%; max-width: 350px; }
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .selection-container {
+                gap: 20px;
+            }
+
+            .selection-card {
+                width: 100%;
+                max-width: 350px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="main-container">
         <h1>欢迎来到排行系统</h1>
@@ -107,7 +134,13 @@
                 <h2>游戏排序系统</h2>
                 <p>添加你喜爱的游戏，通过两两比较得出最终排名。</p>
             </a>
+            <a href="acn.html" class="selection-card">
+                <i class="fas fa-book-open icon-acn"></i>
+                <h2>动画小说漫画排序</h2>
+                <p>添加你喜爱的ACN作品，通过两两比较得出最终排名。</p>
+            </a>
         </div>
     </div>
 </body>
+
 </html>
