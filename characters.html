@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>角色排序系统</title>
+    <title id="page-title-char">角色排序系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* All CSS from the original file is placed here */
@@ -832,36 +832,36 @@
 
 <body>
     <header>
-        <h1>角色排序系统</h1>
-        <p class="subtitle">添加你喜爱的角色，通过两两比较得出最终排名</p>
+        <h1 id="header-title-char">角色排序系统</h1>
+        <p class="subtitle" id="header-subtitle-char">添加你喜爱的角色，通过两两比较得出最终排名</p>
     </header>
 
     <div class="container">
         <div id="add-phase" class="phase active">
             <div class="tutorial">
-                <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+                <h3><i class="fas fa-info-circle"></i> <span id="tutorial-title-text-char">使用说明</span></h3>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> 添加角色：输入角色名称，并上传头像或使用外链图片</li>
-                    <li><i class="fas fa-check-circle"></i> 头像可选：不添加头像将使用默认图标</li>
-                    <li><i class="fas fa-check-circle"></i> 本地存储：所有数据保存在浏览器中，刷新页面不会丢失</li>
-                    <li><i class="fas fa-check-circle"></i> 排序阶段：系统会展示两个角色，选择你更喜欢的角色</li>
-                    <li><i class="fas fa-check-circle"></i> 查看结果：完成所有比较后，系统会生成最终排名</li>
-                    <li><i class="fas fa-check-circle"></i> Powered by DeepSeek R1 & Gemini 2.5 pro</li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-1-text-char">添加角色：输入角色名称，并上传头像或使用外链图片</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-2-text-char">头像可选：不添加头像将使用默认图标</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-3-text-char">本地存储：所有数据保存在浏览器中，刷新页面不会丢失</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-4-text-char">排序阶段：系统会展示两个角色，选择你更喜欢的角色</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-5-text-char">查看结果：完成所有比较后，系统会生成最终排名</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-6-text-char">Powered by DeepSeek R1 & Gemini 2.5 pro</span></li>
                 </ul>
             </div>
 
             <div class="character-form">
                 <div class="form-group">
-                    <label for="character-name">角色名称 *</label>
+                    <label for="character-name" id="label-item-name-char">角色名称 *</label>
                     <input type="text" id="character-name" placeholder="输入角色名称">
                 </div>
 
                 <div class="avatar-options">
                     <div class="avatar-option">
-                        <label>上传头像</label>
+                        <label id="label-upload-cover-char">上传头像</label>
                         <div class="avatar-upload" id="avatar-upload-area">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <span>点击上传图片或拖放文件到此处</span>
+                            <span id="upload-area-span-char">点击上传图片或拖放文件到此处</span>
                             <img id="avatar-preview" alt="头像预览">
                             <div class="cancel-upload" id="cancel-upload">×</div>
                             <input type="file" id="avatar-input" accept="image/*" style="display: none">
@@ -869,39 +869,40 @@
                     </div>
 
                     <div class="avatar-option">
-                        <label>或使用图片链接</label>
+                        <label id="label-url-cover-char">或使用图片链接</label>
                         <div class="url-input-group">
                             <input type="text" id="avatar-url" placeholder="输入头像图片URL">
                         </div>
                         <div class="url-preview-container">
                             <img class="url-preview-image" id="url-preview-image" alt="URL图片预览">
                             <div class="preview-loading" id="preview-loading">
-                                <i class="fas fa-spinner fa-spin"></i> 图片加载中...
+                                <i class="fas fa-spinner fa-spin"></i> <span id="preview-loading-text-char">图片加载中...</span>
                             </div>
                             <div class="preview-error" id="preview-error">
-                                图片加载失败，请检查URL
+                                <span id="preview-error-text-char">图片加载失败，请检查URL</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button id="add-character-btn">添加角色</button>
+                <button id="add-character-btn"><span id="add-item-btn-text-char">添加角色</span></button>
             </div>
 
             <div class="characters-list" id="characters-list">
+                <!-- Placeholder for empty list text -->
             </div>
 
             <div class="actions">
-                <button id="start-sorting-btn" class="btn primary-btn" disabled>开始排序</button>
-                <button id="reset-btn" class="btn secondary-btn">重置所有</button>
-                <a href="index.html" class="btn tertiary-btn">返回首页</a>
+                <button id="start-sorting-btn" class="btn primary-btn" disabled><span id="start-sorting-btn-text-char">开始排序</span></button>
+                <button id="reset-btn" class="btn secondary-btn"><span id="reset-all-btn-text-char">重置所有</span></button>
+                <a href="index.html" class="btn tertiary-btn" id="back-to-home-link-char">返回首页</a>
             </div>
         </div>
 
         <div id="compare-phase" class="phase">
             <div class="comparison-container">
-                <h2 class="comparison-title">你更喜欢哪个角色？</h2>
-                <p class="comparison-subtitle">点击选择你更喜欢的角色</p>
+                <h2 class="comparison-title" id="compare-phase-title-char">你更喜欢哪个角色？</h2>
+                <p class="comparison-subtitle" id="compare-phase-subtitle-char">点击选择你更喜欢的角色</p>
 
                 <div class="characters-comparison">
                     <div class="character-option" id="option1">
@@ -926,11 +927,11 @@
                 </div>
 
                 <div class="comparison-info">
-                    当前进度: <span id="current-comparison">1</span>/<span id="total-comparisons">0</span> 次比较
+                    <span id="compare-info-prefix-char">当前进度: </span><span id="current-comparison">1</span>/<span id="total-comparisons">0</span><span id="compare-info-suffix-char"> 次比较</span>
                 </div>
 
                 <div class="progress-container">
-                    <div class="progress-text">比较进度: <span id="progress-text">0</span>%</div>
+                    <div class="progress-text"><span id="progress-bar-text-prefix-char">比较进度: </span><span id="progress-text">0</span>%</div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>
@@ -940,25 +941,174 @@
 
         <div id="result-phase" class="phase">
             <div class="results-container">
-                <h2 class="results-title">角色排序结果</h2>
-                <p class="results-subtitle">根据你的选择，以下是角色喜爱度排名</p>
+                <h2 class="results-title" id="result-phase-title-char">角色排序结果</h2>
+                <p class="results-subtitle" id="result-phase-subtitle-char">根据你的选择，以下是角色喜爱度排名</p>
 
                 <div class="ranking-list" id="ranking-list">
 
                 </div>
                 <div class="prompt-container">
-                    <h3>请求锐评（复制并发送给 AI）<button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> 复制</button>
+                    <h3><span id="prompt-title-text-char">请求锐评（复制并发送给 AI）</span><button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> <span id="copy-btn-text-char">复制</span></button>
                     </h3>
                     <textarea id="prompt-output" readonly onclick="this.select();"></textarea>
                 </div>
                 <div class="actions">
-                    <button id="restart-btn" class="btn primary-btn">重新开始</button>
-                    <button id="back-to-add-btn" class="btn secondary-btn">返回修改</button>
+                    <button id="restart-btn" class="btn primary-btn"><span id="restart-btn-text-char">重新开始</span></button>
+                    <button id="back-to-add-btn" class="btn secondary-btn"><span id="back-to-add-btn-text-char">返回修改</span></button>
                 </div>
             </div>
         </div>
     </div>
     <canvas id="image-resizer-canvas" style="display:none;"></canvas>
+    <script>
+        // Internationalization Script for characters.html
+        const charI18nData = {
+            'en': {
+                pageTitleChar: "Character Sorting System",
+                headerTitleChar: "Character Sorting System",
+                headerSubtitleChar: "Add your favorite characters and rank them through pairwise comparisons",
+                tutorialTitleTextChar: "Instructions",
+                tutorialLi1TextChar: "Add Characters: Enter character name, and upload avatar or use an external image link.",
+                tutorialLi2TextChar: "Avatar Optional: A default icon will be used if no avatar is added.",
+                tutorialLi3TextChar: "Local Storage: All data is saved in your browser and won't be lost on refresh.",
+                tutorialLi4TextChar: "Sorting Phase: The system will show two characters; choose the one you prefer.",
+                tutorialLi5TextChar: "View Results: After all comparisons, the system will generate the final ranking.",
+                tutorialLi6TextChar: "Powered by DeepSeek R1 & Gemini 2.5 pro",
+                labelItemNameChar: "Character Name *",
+                inputItemNamePlaceholderChar: "Enter character name",
+                labelUploadCoverChar: "Upload Avatar",
+                uploadAreaSpanChar: "Click to upload image or drag and drop file here",
+                labelUrlCoverChar: "Or use Image URL",
+                inputAvatarUrlPlaceholderChar: "Enter avatar image URL",
+                previewLoadingTextChar: " Image loading...",
+                previewErrorTextChar: "Image failed to load, please check URL",
+                addItemBtnTextChar: "Add Character",
+                startSortingBtnTextChar: "Start Sorting",
+                resetAllBtnTextChar: "Reset All",
+                backToHomeLinkChar: "Back to Home",
+                comparePhaseTitleChar: "Which character do you prefer?",
+                comparePhaseSubtitleChar: "Click to select your preferred character",
+                compareInfoPrefixChar: "Current progress: ",
+                compareInfoSuffixChar: " comparisons",
+                progressBarTextPrefixChar: "Comparison progress: ",
+                resultPhaseTitleChar: "Character Sorting Results",
+                resultPhaseSubtitleChar: "Based on your selections, here is the character preference ranking",
+                promptTitleTextChar: "Request Review (Copy and send to AI)",
+                copyBtnTextChar: " Copy",
+                restartBtnTextChar: "Restart",
+                backToAddBtnTextChar: "Back to Modify",
+                // Dynamic texts (will require JS modification to use)
+                alertEnterCharacterName: "Please enter the character name",
+                alertNeedTwoCharacters: "You need to add at least two characters to sort",
+                confirmResetAllCharacters: "Are you sure you want to delete all characters? This action cannot be undone.",
+                alertCopyFailed: "Copy failed, your browser may not support this feature.",
+                copiedSuccessText: "Copied!",
+                emptyCharacterListPlaceholder: "No characters added yet",
+                promptRequestReviewCharTemplate: "You are now a tsundere girl who is proficient in the acg field. I have ranked my favorite characters. Please review them:\n{ranking}"
+            },
+            'zh': {
+                pageTitleChar: "角色排序系统",
+                headerTitleChar: "角色排序系统",
+                headerSubtitleChar: "添加你喜爱的角色，通过两两比较得出最终排名",
+                tutorialTitleTextChar: "使用说明",
+                tutorialLi1TextChar: "添加角色：输入角色名称，并上传头像或使用外链图片",
+                tutorialLi2TextChar: "头像可选：不添加头像将使用默认图标",
+                tutorialLi3TextChar: "本地存储：所有数据保存在浏览器中，刷新页面不会丢失",
+                tutorialLi4TextChar: "排序阶段：系统会展示两个角色，选择你更喜欢的角色",
+                tutorialLi5TextChar: "查看结果：完成所有比较后，系统会生成最终排名",
+                tutorialLi6TextChar: "Powered by DeepSeek R1 & Gemini 2.5 pro",
+                labelItemNameChar: "角色名称 *",
+                inputItemNamePlaceholderChar: "输入角色名称",
+                labelUploadCoverChar: "上传头像",
+                uploadAreaSpanChar: "点击上传图片或拖放文件到此处",
+                labelUrlCoverChar: "或使用图片链接",
+                inputAvatarUrlPlaceholderChar: "输入头像图片URL",
+                previewLoadingTextChar: " 图片加载中...",
+                previewErrorTextChar: "图片加载失败，请检查URL",
+                addItemBtnTextChar: "添加角色",
+                startSortingBtnTextChar: "开始排序",
+                resetAllBtnTextChar: "重置所有",
+                backToHomeLinkChar: "返回首页",
+                comparePhaseTitleChar: "你更喜欢哪个角色？",
+                comparePhaseSubtitleChar: "点击选择你更喜欢的角色",
+                compareInfoPrefixChar: "当前进度: ",
+                compareInfoSuffixChar: " 次比较",
+                progressBarTextPrefixChar: "比较进度: ",
+                resultPhaseTitleChar: "角色排序结果",
+                resultPhaseSubtitleChar: "根据你的选择，以下是角色喜爱度排名",
+                promptTitleTextChar: "请求锐评（复制并发送给 AI）",
+                copyBtnTextChar: " 复制",
+                restartBtnTextChar: "重新开始",
+                backToAddBtnTextChar: "返回修改",
+                alertEnterCharacterName: "请输入角色名称",
+                alertNeedTwoCharacters: "至少需要添加两个角色才能排序",
+                confirmResetAllCharacters: "确定要删除所有角色吗？此操作不可撤销。",
+                alertCopyFailed: "复制失败，您的浏览器可能不支持此功能。",
+                copiedSuccessText: "已复制!",
+                emptyCharacterListPlaceholder: "还没有添加任何角色",
+                promptRequestReviewCharTemplate: "你现在是一个精通acg领域的雌小鬼。我给自己喜欢的角色进行了一个排行，你来进行评价：\n{ranking}"
+            }
+        };
+
+        function applyCharTranslations() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const lang = userLang.startsWith('zh') ? 'zh' : 'en';
+            const texts = charI18nData[lang];
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            document.title = texts.pageTitleChar;
+
+            const elementsToTranslate = {
+                'header-title-char': texts.headerTitleChar,
+                'header-subtitle-char': texts.headerSubtitleChar,
+                'tutorial-title-text-char': texts.tutorialTitleTextChar,
+                'tutorial-li-1-text-char': texts.tutorialLi1TextChar,
+                'tutorial-li-2-text-char': texts.tutorialLi2TextChar,
+                'tutorial-li-3-text-char': texts.tutorialLi3TextChar,
+                'tutorial-li-4-text-char': texts.tutorialLi4TextChar,
+                'tutorial-li-5-text-char': texts.tutorialLi5TextChar,
+                'tutorial-li-6-text-char': texts.tutorialLi6TextChar,
+                'label-item-name-char': texts.labelItemNameChar,
+                'label-upload-cover-char': texts.labelUploadCoverChar,
+                'upload-area-span-char': texts.uploadAreaSpanChar,
+                'label-url-cover-char': texts.labelUrlCoverChar,
+                'preview-loading-text-char': texts.previewLoadingTextChar,
+                'preview-error-text-char': texts.previewErrorTextChar,
+                'add-item-btn-text-char': texts.addItemBtnTextChar,
+                'start-sorting-btn-text-char': texts.startSortingBtnTextChar,
+                'reset-all-btn-text-char': texts.resetAllBtnTextChar,
+                'back-to-home-link-char': texts.backToHomeLinkChar,
+                'compare-phase-title-char': texts.comparePhaseTitleChar,
+                'compare-phase-subtitle-char': texts.comparePhaseSubtitleChar,
+                'compare-info-prefix-char': texts.compareInfoPrefixChar,
+                'compare-info-suffix-char': texts.compareInfoSuffixChar,
+                'progress-bar-text-prefix-char': texts.progressBarTextPrefixChar,
+                'result-phase-title-char': texts.resultPhaseTitleChar,
+                'result-phase-subtitle-char': texts.resultPhaseSubtitleChar,
+                'prompt-title-text-char': texts.promptTitleTextChar,
+                'copy-btn-text-char': texts.copyBtnTextChar,
+                'restart-btn-text-char': texts.restartBtnTextChar,
+                'back-to-add-btn-text-char': texts.backToAddBtnTextChar
+            };
+
+            for (const id in elementsToTranslate) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = elementsToTranslate[id];
+                }
+            }
+
+            const characterNameInput = document.getElementById('character-name');
+            if (characterNameInput) characterNameInput.placeholder = texts.inputItemNamePlaceholderChar;
+            const avatarUrlInput = document.getElementById('avatar-url');
+            if (avatarUrlInput) avatarUrlInput.placeholder = texts.inputAvatarUrlPlaceholderChar;
+
+            window.currentCharTranslations = texts; // Store for main script if needed
+        }
+
+        document.addEventListener('DOMContentLoaded', applyCharTranslations);
+    </script>
     <script>
         // All JavaScript from the original file is placed here
         document.addEventListener('DOMContentLoaded', function () {
@@ -1154,7 +1304,7 @@ let debounceTimer;
                 const name = characterNameInput.value.trim();
 
                 if (!name) {
-                    alert('请输入角色名称');
+                    alert(window.currentCharTranslations.alertEnterCharacterName);
                     return;
                 }
 
@@ -1192,7 +1342,7 @@ let debounceTimer;
             // Start sorting
             startSortingBtn.addEventListener('click', function () {
                 if (characters.length < 2) {
-                    alert('至少需要添加两个角色才能排序');
+                    alert(window.currentCharTranslations.alertNeedTwoCharacters);
                     return;
                 }
 
@@ -1211,7 +1361,7 @@ let debounceTimer;
 
             // Reset button
             resetBtn.addEventListener('click', function () {
-                if (confirm('确定要删除所有角色吗？此操作不可撤销。')) {
+                if (confirm(window.currentCharTranslations.confirmResetAllCharacters)) {
                     characters = [];
                     localStorage.removeItem('characters');
                     renderCharacterList();
@@ -1247,7 +1397,7 @@ let debounceTimer;
                 charactersList.innerHTML = '';
 
                 if (characters.length === 0) {
-                    charactersList.innerHTML = '<p style="text-align:center; opacity:0.7; padding:30px;">还没有添加任何角色</p>';
+                    charactersList.innerHTML = `<p style="text-align:center; opacity:0.7; padding:30px;">${window.currentCharTranslations.emptyCharacterListPlaceholder}</p>`;
                     return;
                 }
 
@@ -1379,24 +1529,28 @@ let debounceTimer;
                 // 复制按钮事件
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(promptOutput.value).then(() => {
-                        const originalText = copyBtn.innerHTML;
-                        copyBtn.innerHTML = '已复制!';
+                        const originalButtonHtml = copyBtn.innerHTML;
+                        const copyTextSpan = document.getElementById('copy-btn-text-char');
+                        if(copyTextSpan) copyTextSpan.textContent = window.currentCharTranslations.copiedSuccessText.replace('!', '');
                         copyBtn.style.color = '#4caf50';
                         copyBtn.style.borderColor = '#4caf50';
                         setTimeout(() => {
-                            copyBtn.innerHTML = originalText;
+                            copyBtn.innerHTML = originalButtonHtml;
+                            const restoredCopyTextSpan = document.getElementById('copy-btn-text-char');
+                            if(restoredCopyTextSpan) restoredCopyTextSpan.textContent = window.currentCharTranslations.copyBtnTextChar.trim();
                             copyBtn.style.color = '#ffc107';
                             copyBtn.style.borderColor = '#ffc107';
                         }, 2000);
                     }).catch(err => {
                         console.error('复制失败: ', err);
-                        alert('复制失败，您的浏览器可能不支持此功能。');
+                        alert(window.currentCharTranslations.alertCopyFailed);
                     });
                 });
                 // --- 添加以下内容 ---
                 // 生成评价文本
                 const rankingText = sortedCharacters.map((character, index) => `${index + 1}. ${character.name}`).join('\n');
-                const promptText = `你现在是一个精通acg领域的雌小鬼。我给自己喜欢的角色进行了一个排行，你来进行评价：\n${rankingText}`;
+                const promptTemplate = window.currentCharTranslations.promptRequestReviewCharTemplate;
+                const promptText = promptTemplate.replace('{ranking}', rankingText);
                 promptOutput.value = promptText;
             }
         });

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACN排序系统</title>
+    <title id="page-title">ACN排序系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* All CSS from the original file is placed here */
@@ -850,36 +850,36 @@
 
 <body>
     <header>
-        <h1>动画小说漫画排序系统</h1>
-        <p class="subtitle">添加你喜爱的ACN作品，通过两两比较得出最终排名</p>
+        <h1 id="header-title">动画小说漫画排序系统</h1>
+        <p class="subtitle" id="header-subtitle">添加你喜爱的ACN作品，通过两两比较得出最终排名</p>
     </header>
 
     <div class="container">
         <div id="add-phase" class="phase active">
             <div class="tutorial">
-                <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+                <h3><i class="fas fa-info-circle"></i> <span id="tutorial-title-text">使用说明</span></h3>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> 添加作品：输入作品名称，并上传封面或使用外链图片</li>
-                    <li><i class="fas fa-check-circle"></i> 封面可选：不添加封面将使用默认图标</li>
-                    <li><i class="fas fa-check-circle"></i> 本地存储：所有数据保存在浏览器中，刷新页面不会丢失</li>
-                    <li><i class="fas fa-check-circle"></i> 排序阶段：系统会展示两个作品，选择你更喜欢的作品</li>
-                    <li><i class="fas fa-check-circle"></i> 查看结果：完成所有比较后，系统会生成最终排名</li>
-                    <li><i class="fas fa-check-circle"></i> Powered by DeepSeek R1 & Gemini 2.5 pro</li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-1-text">添加作品：输入作品名称，并上传封面或使用外链图片</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-2-text">封面可选：不添加封面将使用默认图标</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-3-text">本地存储：所有数据保存在浏览器中，刷新页面不会丢失</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-4-text">排序阶段：系统会展示两个作品，选择你更喜欢的作品</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-5-text">查看结果：完成所有比较后，系统会生成最终排名</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-6-text">Powered by DeepSeek R1 & Gemini 2.5 pro</span></li>
                 </ul>
             </div>
 
             <div class="character-form">
                 <div class="form-group">
-                    <label for="character-name">作品名称 *</label>
+                    <label for="character-name" id="label-item-name">作品名称 *</label>
                     <input type="text" id="character-name" placeholder="输入动画、小说或漫画名称">
                 </div>
 
                 <div class="avatar-options">
                     <div class="avatar-option">
-                        <label>上传封面</label>
+                        <label id="label-upload-cover">上传封面</label>
                         <div class="avatar-upload" id="avatar-upload-area">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <span>点击上传图片或拖放文件到此处</span>
+                            <span id="upload-area-span">点击上传图片或拖放文件到此处</span>
                             <img id="avatar-preview" alt="封面预览">
                             <div class="cancel-upload" id="cancel-upload">×</div>
                             <input type="file" id="avatar-input" accept="image/*" style="display: none">
@@ -887,39 +887,40 @@
                     </div>
 
                     <div class="avatar-option">
-                        <label>或使用图片链接</label>
+                        <label id="label-url-cover">或使用图片链接</label>
                         <div class="url-input-group">
                             <input type="text" id="avatar-url" placeholder="输入封面图片URL">
                         </div>
                         <div class="url-preview-container">
                             <img class="url-preview-image" id="url-preview-image" alt="URL图片预览">
                             <div class="preview-loading" id="preview-loading">
-                                <i class="fas fa-spinner fa-spin"></i> 图片加载中...
+                                <i class="fas fa-spinner fa-spin"></i> <span id="preview-loading-text">图片加载中...</span>
                             </div>
                             <div class="preview-error" id="preview-error">
-                                图片加载失败，请检查URL
+                                <span id="preview-error-text">图片加载失败，请检查URL</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button id="add-character-btn">添加作品</button>
+                <button id="add-character-btn"><span id="add-item-btn-text">添加作品</span></button>
             </div>
 
             <div class="characters-list" id="characters-list">
+                <!-- Placeholder for empty list text, to be handled by JS or a static element here -->
             </div>
 
             <div class="actions">
-                <button id="start-sorting-btn" class="btn primary-btn" disabled>开始排序</button>
-                <button id="reset-btn" class="btn secondary-btn">重置所有</button>
-                <a href="index.html" class="btn tertiary-btn">返回首页</a>
+                <button id="start-sorting-btn" class="btn primary-btn" disabled><span id="start-sorting-btn-text">开始排序</span></button>
+                <button id="reset-btn" class="btn secondary-btn"><span id="reset-all-btn-text">重置所有</span></button>
+                <a href="index.html" class="btn tertiary-btn" id="back-to-home-link">返回首页</a>
             </div>
         </div>
 
         <div id="compare-phase" class="phase">
             <div class="comparison-container">
-                <h2 class="comparison-title">你更喜欢哪个作品？</h2>
-                <p class="comparison-subtitle">点击选择你更喜欢的作品</p>
+                <h2 class="comparison-title" id="compare-phase-title">你更喜欢哪个作品？</h2>
+                <p class="comparison-subtitle" id="compare-phase-subtitle">点击选择你更喜欢的作品</p>
 
                 <div class="characters-comparison">
                     <div class="character-option" id="option1">
@@ -944,11 +945,11 @@
                 </div>
 
                 <div class="comparison-info">
-                    当前进度: <span id="current-comparison">1</span>/<span id="total-comparisons">0</span> 次比较
+                    <span id="compare-info-prefix">当前进度: </span><span id="current-comparison">1</span>/<span id="total-comparisons">0</span><span id="compare-info-suffix"> 次比较</span>
                 </div>
 
                 <div class="progress-container">
-                    <div class="progress-text">比较进度: <span id="progress-text">0</span>%</div>
+                    <div class="progress-text"><span id="progress-bar-text-prefix">比较进度: </span><span id="progress-text">0</span>%</div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>
@@ -958,25 +959,176 @@
 
         <div id="result-phase" class="phase">
             <div class="results-container">
-                <h2 class="results-title">作品排序结果</h2>
-                <p class="results-subtitle">根据你的选择，以下是作品喜爱度排名</p>
+                <h2 class="results-title" id="result-phase-title">作品排序结果</h2>
+                <p class="results-subtitle" id="result-phase-subtitle">根据你的选择，以下是作品喜爱度排名</p>
 
                 <div class="ranking-list" id="ranking-list">
 
                 </div>
                 <div class="prompt-container">
-                    <h3>请求锐评（复制并发送给 AI）<button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> 复制</button>
+                    <h3><span id="prompt-title-text">请求锐评（复制并发送给 AI）</span><button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> <span id="copy-btn-text">复制</span></button>
                     </h3>
                     <textarea id="prompt-output" readonly onclick="this.select();"></textarea>
                 </div>
                 <div class="actions">
-                    <button id="restart-btn" class="btn primary-btn">重新开始</button>
-                    <button id="back-to-add-btn" class="btn secondary-btn">返回修改</button>
+                    <button id="restart-btn" class="btn primary-btn"><span id="restart-btn-text">重新开始</span></button>
+                    <button id="back-to-add-btn" class="btn secondary-btn"><span id="back-to-add-btn-text">返回修改</span></button>
                 </div>
             </div>
         </div>
     </div>
     <canvas id="image-resizer-canvas" style="display:none;"></canvas>
+    <script>
+        // Internationalization Script
+        const i18nData = {
+            'en': {
+                pageTitle: "ACN Sorting System",
+                headerTitle: "Anime/Novel/Comic Sorting System",
+                headerSubtitle: "Add your favorite ACN works and rank them through pairwise comparisons",
+                tutorialTitleText: "Instructions",
+                tutorialLi1Text: "Add Works: Enter the work's name, and upload a cover or use an external image link.",
+                tutorialLi2Text: "Cover Optional: A default icon will be used if no cover is added.",
+                tutorialLi3Text: "Local Storage: All data is saved in your browser and won't be lost on refresh.",
+                tutorialLi4Text: "Sorting Phase: The system will show two works; choose the one you prefer.",
+                tutorialLi5Text: "View Results: After all comparisons, the system will generate the final ranking.",
+                tutorialLi6Text: "Powered by DeepSeek R1 & Gemini 2.5 pro",
+                labelItemName: "Work Name *",
+                inputItemNamePlaceholder: "Enter Anime, Novel, or Comic name",
+                labelUploadCover: "Upload Cover",
+                uploadAreaSpan: "Click to upload image or drag and drop file here",
+                labelUrlCover: "Or use Image URL",
+                inputAvatarUrlPlaceholder: "Enter cover image URL",
+                previewLoadingText: " Image loading...",
+                previewErrorText: "Image failed to load, please check URL",
+                addItemBtnText: "Add Work",
+                startSortingBtnText: "Start Sorting",
+                resetAllBtnText: "Reset All",
+                backToHomeLink: "Back to Home",
+                comparePhaseTitle: "Which work do you prefer?",
+                comparePhaseSubtitle: "Click to select your preferred work",
+                compareInfoPrefix: "Current progress: ",
+                compareInfoSuffix: " comparisons",
+                progressBarTextPrefix: "Comparison progress: ",
+                resultPhaseTitle: "Work Sorting Results",
+                resultPhaseSubtitle: "Based on your selections, here is the work preference ranking",
+                promptTitleText: "Request Review (Copy and send to AI)",
+                copyBtnText: " Copy",
+                restartBtnText: "Restart",
+                backToAddBtnText: "Back to Modify",
+                // Dynamic texts (will require JS modification to use)
+                alertEnterWorkName: "Please enter the work name",
+                alertNeedTwoWorks: "You need to add at least two works to sort",
+                confirmResetAll: "Are you sure you want to delete all works? This action cannot be undone.",
+                alertCopyFailed: "Copy failed, your browser may not support this feature.",
+                copiedSuccessText: "Copied!",
+                emptyListPlaceholder: "No works added yet",
+                promptRequestReviewTemplate: "You are now a tsundere girl who is proficient in the acg field. I have ranked my favorite anime, comics, and novels. Please review them:\n{ranking}"
+            },
+            'zh': {
+                pageTitle: "ACN排序系统",
+                headerTitle: "动画小说漫画排序系统",
+                headerSubtitle: "添加你喜爱的ACN作品，通过两两比较得出最终排名",
+                tutorialTitleText: "使用说明",
+                tutorialLi1Text: "添加作品：输入作品名称，并上传封面或使用外链图片",
+                tutorialLi2Text: "封面可选：不添加封面将使用默认图标",
+                tutorialLi3Text: "本地存储：所有数据保存在浏览器中，刷新页面不会丢失",
+                tutorialLi4Text: "排序阶段：系统会展示两个作品，选择你更喜欢的作品",
+                tutorialLi5Text: "查看结果：完成所有比较后，系统会生成最终排名",
+                tutorialLi6Text: "Powered by DeepSeek R1 & Gemini 2.5 pro",
+                labelItemName: "作品名称 *",
+                inputItemNamePlaceholder: "输入动画、小说或漫画名称",
+                labelUploadCover: "上传封面",
+                uploadAreaSpan: "点击上传图片或拖放文件到此处",
+                labelUrlCover: "或使用图片链接",
+                inputAvatarUrlPlaceholder: "输入封面图片URL",
+                previewLoadingText: " 图片加载中...",
+                previewErrorText: "图片加载失败，请检查URL",
+                addItemBtnText: "添加作品",
+                startSortingBtnText: "开始排序",
+                resetAllBtnText: "重置所有",
+                backToHomeLink: "返回首页",
+                comparePhaseTitle: "你更喜欢哪个作品？",
+                comparePhaseSubtitle: "点击选择你更喜欢的作品",
+                compareInfoPrefix: "当前进度: ",
+                compareInfoSuffix: " 次比较",
+                progressBarTextPrefix: "比较进度: ",
+                resultPhaseTitle: "作品排序结果",
+                resultPhaseSubtitle: "根据你的选择，以下是作品喜爱度排名",
+                promptTitleText: "请求锐评（复制并发送给 AI）",
+                copyBtnText: " 复制",
+                restartBtnText: "重新开始",
+                backToAddBtnText: "返回修改",
+                alertEnterWorkName: "请输入作品名称",
+                alertNeedTwoWorks: "至少需要添加两个作品才能排序",
+                confirmResetAll: "确定要删除所有作品吗？此操作不可撤销。",
+                alertCopyFailed: "复制失败，您的浏览器可能不支持此功能。",
+                copiedSuccessText: "已复制!",
+                emptyListPlaceholder: "还没有添加任何作品",
+                promptRequestReviewTemplate: "你现在是一个精通acg领域的雌小鬼。我给自己喜欢的动画、漫画、小说进行了一个排行，你来进行评价：\n{ranking}"
+            }
+        };
+
+        function applyTranslations() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const lang = userLang.startsWith('zh') ? 'zh' : 'en';
+            const texts = i18nData[lang];
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            document.title = texts.pageTitle;
+
+            const elementsToTranslate = {
+                'header-title': texts.headerTitle,
+                'header-subtitle': texts.headerSubtitle,
+                'tutorial-title-text': texts.tutorialTitleText,
+                'tutorial-li-1-text': texts.tutorialLi1Text,
+                'tutorial-li-2-text': texts.tutorialLi2Text,
+                'tutorial-li-3-text': texts.tutorialLi3Text,
+                'tutorial-li-4-text': texts.tutorialLi4Text,
+                'tutorial-li-5-text': texts.tutorialLi5Text,
+                'tutorial-li-6-text': texts.tutorialLi6Text,
+                'label-item-name': texts.labelItemName,
+                'label-upload-cover': texts.labelUploadCover,
+                'upload-area-span': texts.uploadAreaSpan,
+                'label-url-cover': texts.labelUrlCover,
+                'preview-loading-text': texts.previewLoadingText,
+                'preview-error-text': texts.previewErrorText,
+                'add-item-btn-text': texts.addItemBtnText,
+                'start-sorting-btn-text': texts.startSortingBtnText,
+                'reset-all-btn-text': texts.resetAllBtnText,
+                'back-to-home-link': texts.backToHomeLink,
+                'compare-phase-title': texts.comparePhaseTitle,
+                'compare-phase-subtitle': texts.comparePhaseSubtitle,
+                'compare-info-prefix': texts.compareInfoPrefix,
+                'compare-info-suffix': texts.compareInfoSuffix,
+                'progress-bar-text-prefix': texts.progressBarTextPrefix,
+                'result-phase-title': texts.resultPhaseTitle,
+                'result-phase-subtitle': texts.resultPhaseSubtitle,
+                'prompt-title-text': texts.promptTitleText,
+                'copy-btn-text': texts.copyBtnText,
+                'restart-btn-text': texts.restartBtnText,
+                'back-to-add-btn-text': texts.backToAddBtnText
+            };
+
+            for (const id in elementsToTranslate) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = elementsToTranslate[id];
+                }
+            }
+
+            // Placeholders
+            const characterNameInput = document.getElementById('character-name');
+            if (characterNameInput) characterNameInput.placeholder = texts.inputItemNamePlaceholder;
+            const avatarUrlInput = document.getElementById('avatar-url');
+            if (avatarUrlInput) avatarUrlInput.placeholder = texts.inputAvatarUrlPlaceholder;
+
+            // Store translations for dynamic JS parts if needed later
+            window.currentTranslations = texts;
+        }
+
+        document.addEventListener('DOMContentLoaded', applyTranslations);
+    </script>
     <script>
         // All JavaScript from the original file is placed here
         // Note: Variable and function names like 'characters' are kept for simplicity
@@ -1172,7 +1324,7 @@
                 const name = characterNameInput.value.trim();
 
                 if (!name) {
-                    alert('请输入作品名称'); // Updated text
+                    alert(window.currentTranslations.alertEnterWorkName);
                     return;
                 }
 
@@ -1210,7 +1362,7 @@
             // Start sorting
             startSortingBtn.addEventListener('click', function () {
                 if (characters.length < 2) {
-                    alert('至少需要添加两个作品才能排序'); // Updated text
+                    alert(window.currentTranslations.alertNeedTwoWorks);
                     return;
                 }
 
@@ -1229,7 +1381,7 @@
 
             // Reset button
             resetBtn.addEventListener('click', function () {
-                if (confirm('确定要删除所有作品吗？此操作不可撤销。')) { // Updated text
+                if (confirm(window.currentTranslations.confirmResetAll)) {
                     characters = [];
                     localStorage.removeItem('acn_items'); // Use unique key
                     renderCharacterList();
@@ -1265,7 +1417,7 @@
                 charactersList.innerHTML = '';
 
                 if (characters.length === 0) {
-                    charactersList.innerHTML = '<p style="text-align:center; opacity:0.7; padding:30px;">还没有添加任何作品</p>'; // Updated text
+                    charactersList.innerHTML = `<p style="text-align:center; opacity:0.7; padding:30px;">${window.currentTranslations.emptyListPlaceholder}</p>`;
                     return;
                 }
 
@@ -1398,24 +1550,30 @@
                 // Copy button event
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(promptOutput.value).then(() => {
-                        const originalText = copyBtn.innerHTML;
-                        copyBtn.innerHTML = '已复制!';
+                        const originalButtonHtml = copyBtn.innerHTML; // Save the icon + text span
+                        const copyTextSpan = document.getElementById('copy-btn-text');
+                        if (copyTextSpan) copyTextSpan.textContent = window.currentTranslations.copiedSuccessText.replace('!', ''); // Remove ! for button
                         copyBtn.style.color = '#4caf50';
                         copyBtn.style.borderColor = '#4caf50';
                         setTimeout(() => {
-                            copyBtn.innerHTML = originalText;
+                            copyBtn.innerHTML = originalButtonHtml; // Restore original icon + span
+                            // Re-fetch the span if it was replaced
+                            const restoredCopyTextSpan = document.getElementById('copy-btn-text');
+                            if(restoredCopyTextSpan) restoredCopyTextSpan.textContent = window.currentTranslations.copyBtnText.trim();
+
                             copyBtn.style.color = '#c797d8'; // New Theme
                             copyBtn.style.borderColor = '#c797d8'; // New Theme
                         }, 2000);
                     }).catch(err => {
                         console.error('复制失败: ', err);
-                        alert('复制失败，您的浏览器可能不支持此功能。');
+                        alert(window.currentTranslations.alertCopyFailed);
                     });
                 });
 
                 // Generate prompt text
                 const rankingText = sortedCharacters.map((character, index) => `${index + 1}. ${character.name}`).join('\n');
-                const promptText = `你现在是一个精通acg领域的雌小鬼。我给自己喜欢的动画、漫画、小说进行了一个排行，你来进行评价：\n${rankingText}`; // Updated prompt
+                const promptTemplate = window.currentTranslations.promptRequestReviewTemplate;
+                const promptText = promptTemplate.replace('{ranking}', rankingText);
                 promptOutput.value = promptText;
             }
         });

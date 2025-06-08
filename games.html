@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏排序系统</title>
+    <title id="page-title-game">游戏排序系统</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* All CSS from the original file is placed here, no changes needed */
@@ -823,36 +823,36 @@
 
 <body>
     <header>
-        <h1>游戏排序系统</h1>
-        <p class="subtitle">添加你喜爱的游戏，通过两两比较得出最终排名</p>
+        <h1 id="header-title-game">游戏排序系统</h1>
+        <p class="subtitle" id="header-subtitle-game">添加你喜爱的游戏，通过两两比较得出最终排名</p>
     </header>
 
     <div class="container">
         <div id="add-phase" class="phase active">
             <div class="tutorial">
-                <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+                <h3><i class="fas fa-info-circle"></i> <span id="tutorial-title-text-game">使用说明</span></h3>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> 添加游戏：输入游戏名称，并上传封面或使用外链图片</li>
-                    <li><i class="fas fa-check-circle"></i> 封面可选：不添加封面将使用默认图标</li>
-                    <li><i class="fas fa-check-circle"></i> 本地存储：所有数据保存在浏览器中，刷新页面不会丢失</li>
-                    <li><i class="fas fa-check-circle"></i> 排序阶段：系统会展示两个游戏，选择你更喜欢的游戏</li>
-                    <li><i class="fas fa-check-circle"></i> 查看结果：完成所有比较后，系统会生成最终排名</li>
-                    <li><i class="fas fa-check-circle"></i> Powered by DeepSeek R1 & Gemini 2.5 pro</li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-1-text-game">添加游戏：输入游戏名称，并上传封面或使用外链图片</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-2-text-game">封面可选：不添加封面将使用默认图标</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-3-text-game">本地存储：所有数据保存在浏览器中，刷新页面不会丢失</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-4-text-game">排序阶段：系统会展示两个游戏，选择你更喜欢的游戏</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-5-text-game">查看结果：完成所有比较后，系统会生成最终排名</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-6-text-game">Powered by DeepSeek R1 & Gemini 2.5 pro</span></li>
                 </ul>
             </div>
 
             <div class="game-form">
                 <div class="form-group">
-                    <label for="game-name">游戏名称 *</label>
+                    <label for="game-name" id="label-item-name-game">游戏名称 *</label>
                     <input type="text" id="game-name" placeholder="输入游戏名称">
                 </div>
 
                 <div class="cover-options">
                     <div class="cover-option">
-                        <label>上传封面</label>
+                        <label id="label-upload-cover-game">上传封面</label>
                         <div class="cover-upload" id="cover-upload-area">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <span>点击上传图片或拖放文件到此处</span>
+                            <span id="upload-area-span-game">点击上传图片或拖放文件到此处</span>
                             <img id="cover-preview" alt="封面预览">
                             <div class="cancel-upload" id="cancel-upload">×</div>
                             <input type="file" id="cover-input" accept="image/*" style="display: none">
@@ -860,39 +860,40 @@
                     </div>
 
                     <div class="cover-option">
-                        <label>或使用图片链接</label>
+                        <label id="label-url-cover-game">或使用图片链接</label>
                         <div class="url-input-group">
                             <input type="text" id="cover-url" placeholder="输入封面图片URL">
                         </div>
                         <div class="url-preview-container">
                             <img class="url-preview-image" id="url-preview-image" alt="URL图片预览">
                             <div class="preview-loading" id="preview-loading">
-                                <i class="fas fa-spinner fa-spin"></i> 图片加载中...
+                                <i class="fas fa-spinner fa-spin"></i> <span id="preview-loading-text-game">图片加载中...</span>
                             </div>
                             <div class="preview-error" id="preview-error">
-                                图片加载失败，请检查URL
+                                <span id="preview-error-text-game">图片加载失败，请检查URL</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button id="add-game-btn">添加游戏</button>
+                <button id="add-game-btn"><span id="add-item-btn-text-game">添加游戏</span></button>
             </div>
 
             <div class="games-list" id="games-list">
+                <!-- Placeholder for empty list text -->
             </div>
 
             <div class="actions">
-                <button id="start-sorting-btn" class="btn primary-btn" disabled>开始排序</button>
-                <button id="reset-btn" class="btn secondary-btn">重置所有</button>
-                <a href="index.html" class="btn tertiary-btn">返回首页</a>
+                <button id="start-sorting-btn" class="btn primary-btn" disabled><span id="start-sorting-btn-text-game">开始排序</span></button>
+                <button id="reset-btn" class="btn secondary-btn"><span id="reset-all-btn-text-game">重置所有</span></button>
+                <a href="index.html" class="btn tertiary-btn" id="back-to-home-link-game">返回首页</a>
             </div>
         </div>
 
         <div id="compare-phase" class="phase">
             <div class="comparison-container">
-                <h2 class="comparison-title">你更喜欢哪个游戏？</h2>
-                <p class="comparison-subtitle">点击选择你更喜欢的游戏</p>
+                <h2 class="comparison-title" id="compare-phase-title-game">你更喜欢哪个游戏？</h2>
+                <p class="comparison-subtitle" id="compare-phase-subtitle-game">点击选择你更喜欢的游戏</p>
 
                 <div class="games-comparison">
                     <div class="game-option" id="option1">
@@ -917,11 +918,11 @@
                 </div>
 
                 <div class="comparison-info">
-                    当前进度: <span id="current-comparison">1</span>/<span id="total-comparisons">0</span> 次比较
+                    <span id="compare-info-prefix-game">当前进度: </span><span id="current-comparison">1</span>/<span id="total-comparisons">0</span><span id="compare-info-suffix-game"> 次比较</span>
                 </div>
 
                 <div class="progress-container">
-                    <div class="progress-text">比较进度: <span id="progress-text">0</span>%</div>
+                    <div class="progress-text"><span id="progress-bar-text-prefix-game">比较进度: </span><span id="progress-text">0</span>%</div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="progress-fill"></div>
                     </div>
@@ -931,24 +932,173 @@
 
         <div id="result-phase" class="phase">
             <div class="results-container">
-                <h2 class="results-title">游戏排序结果</h2>
-                <p class="results-subtitle">根据你的选择，以下是游戏喜爱度排名</p>
+                <h2 class="results-title" id="result-phase-title-game">游戏排序结果</h2>
+                <p class="results-subtitle" id="result-phase-subtitle-game">根据你的选择，以下是游戏喜爱度排名</p>
 
                 <div class="ranking-list" id="ranking-list">
                 </div>
                 <div class="prompt-container">
-                    <h3>请求锐评（复制并发送给 AI）<button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> 复制</button>
+                    <h3><span id="prompt-title-text-game">请求锐评（复制并发送给 AI）</span><button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> <span id="copy-btn-text-game">复制</span></button>
                     </h3>
                     <textarea id="prompt-output" readonly onclick="this.select();"></textarea>
                 </div>
                 <div class="actions">
-                    <button id="restart-btn" class="btn primary-btn">重新开始</button>
-                    <button id="back-to-add-btn" class="btn secondary-btn">返回修改</button>
+                    <button id="restart-btn" class="btn primary-btn"><span id="restart-btn-text-game">重新开始</span></button>
+                    <button id="back-to-add-btn" class="btn secondary-btn"><span id="back-to-add-btn-text-game">返回修改</span></button>
                 </div>
             </div>
         </div>
     </div>
     <canvas id="image-resizer-canvas" style="display:none;"></canvas>
+    <script>
+        // Internationalization Script for games.html
+        const gameI18nData = {
+            'en': {
+                pageTitleGame: "Game Sorting System",
+                headerTitleGame: "Game Sorting System",
+                headerSubtitleGame: "Add your favorite games and rank them through pairwise comparisons",
+                tutorialTitleTextGame: "Instructions",
+                tutorialLi1TextGame: "Add Games: Enter game name, and upload cover or use an external image link.",
+                tutorialLi2TextGame: "Cover Optional: A default icon will be used if no cover is added.",
+                tutorialLi3TextGame: "Local Storage: All data is saved in your browser and won't be lost on refresh.",
+                tutorialLi4TextGame: "Sorting Phase: The system will show two games; choose the one you prefer.",
+                tutorialLi5TextGame: "View Results: After all comparisons, the system will generate the final ranking.",
+                tutorialLi6TextGame: "Powered by DeepSeek R1 & Gemini 2.5 pro",
+                labelItemNameGame: "Game Name *",
+                inputItemNamePlaceholderGame: "Enter game name",
+                labelUploadCoverGame: "Upload Cover",
+                uploadAreaSpanGame: "Click to upload image or drag and drop file here",
+                labelUrlCoverGame: "Or use Image URL",
+                inputCoverUrlPlaceholderGame: "Enter cover image URL",
+                previewLoadingTextGame: " Image loading...",
+                previewErrorTextGame: "Image failed to load, please check URL",
+                addItemBtnTextGame: "Add Game",
+                startSortingBtnTextGame: "Start Sorting",
+                resetAllBtnTextGame: "Reset All",
+                backToHomeLinkGame: "Back to Home",
+                comparePhaseTitleGame: "Which game do you prefer?",
+                comparePhaseSubtitleGame: "Click to select your preferred game",
+                compareInfoPrefixGame: "Current progress: ",
+                compareInfoSuffixGame: " comparisons",
+                progressBarTextPrefixGame: "Comparison progress: ",
+                resultPhaseTitleGame: "Game Sorting Results",
+                resultPhaseSubtitleGame: "Based on your selections, here is the game preference ranking",
+                promptTitleTextGame: "Request Review (Copy and send to AI)",
+                copyBtnTextGame: " Copy",
+                restartBtnTextGame: "Restart",
+                backToAddBtnTextGame: "Back to Modify",
+                // Dynamic texts
+                alertEnterGameName: "Please enter the game name",
+                alertNeedTwoGames: "You need to add at least two games to sort",
+                confirmResetAllGames: "Are you sure you want to delete all games? This action cannot be undone.",
+                alertCopyFailed: "Copy failed, your browser may not support this feature.",
+                copiedSuccessText: "Copied!",
+                emptyGameListPlaceholder: "No games added yet",
+                promptRequestReviewGameTemplate: "You are now a tsundere girl who is proficient in the acg field. I have ranked my favorite games. Please review them:\n{ranking}"
+            },
+            'zh': {
+                pageTitleGame: "游戏排序系统",
+                headerTitleGame: "游戏排序系统",
+                headerSubtitleGame: "添加你喜爱的游戏，通过两两比较得出最终排名",
+                tutorialTitleTextGame: "使用说明",
+                tutorialLi1TextGame: "添加游戏：输入游戏名称，并上传封面或使用外链图片",
+                tutorialLi2TextGame: "封面可选：不添加封面将使用默认图标",
+                tutorialLi3TextGame: "本地存储：所有数据保存在浏览器中，刷新页面不会丢失",
+                tutorialLi4TextGame: "排序阶段：系统会展示两个游戏，选择你更喜欢的游戏",
+                tutorialLi5TextGame: "查看结果：完成所有比较后，系统会生成最终排名",
+                tutorialLi6TextGame: "Powered by DeepSeek R1 & Gemini 2.5 pro",
+                labelItemNameGame: "游戏名称 *",
+                inputItemNamePlaceholderGame: "输入游戏名称",
+                labelUploadCoverGame: "上传封面",
+                uploadAreaSpanGame: "点击上传图片或拖放文件到此处",
+                labelUrlCoverGame: "或使用图片链接",
+                inputCoverUrlPlaceholderGame: "输入封面图片URL",
+                previewLoadingTextGame: " 图片加载中...",
+                previewErrorTextGame: "图片加载失败，请检查URL",
+                addItemBtnTextGame: "添加游戏",
+                startSortingBtnTextGame: "开始排序",
+                resetAllBtnTextGame: "重置所有",
+                backToHomeLinkGame: "返回首页",
+                comparePhaseTitleGame: "你更喜欢哪个游戏？",
+                comparePhaseSubtitleGame: "点击选择你更喜欢的游戏",
+                compareInfoPrefixGame: "当前进度: ",
+                compareInfoSuffixGame: " 次比较",
+                progressBarTextPrefixGame: "比较进度: ",
+                resultPhaseTitleGame: "游戏排序结果",
+                resultPhaseSubtitleGame: "根据你的选择，以下是游戏喜爱度排名",
+                promptTitleTextGame: "请求锐评（复制并发送给 AI）",
+                copyBtnTextGame: " 复制",
+                restartBtnTextGame: "重新开始",
+                backToAddBtnTextGame: "返回修改",
+                alertEnterGameName: "请输入游戏名称",
+                alertNeedTwoGames: "至少需要添加两个游戏才能排序",
+                confirmResetAllGames: "确定要删除所有游戏吗？此操作不可撤销。",
+                alertCopyFailed: "复制失败，您的浏览器可能不支持此功能。",
+                copiedSuccessText: "已复制!",
+                emptyGameListPlaceholder: "还没有添加任何游戏",
+                promptRequestReviewGameTemplate: "你现在是一个精通acg领域的雌小鬼。我给自己喜欢的游戏进行了一个排行，你来进行评价：\n{ranking}"
+            }
+        };
+
+        function applyGameTranslations() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const lang = userLang.startsWith('zh') ? 'zh' : 'en';
+            const texts = gameI18nData[lang];
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            document.title = texts.pageTitleGame;
+
+            const elementsToTranslate = {
+                'header-title-game': texts.headerTitleGame,
+                'header-subtitle-game': texts.headerSubtitleGame,
+                'tutorial-title-text-game': texts.tutorialTitleTextGame,
+                'tutorial-li-1-text-game': texts.tutorialLi1TextGame,
+                'tutorial-li-2-text-game': texts.tutorialLi2TextGame,
+                'tutorial-li-3-text-game': texts.tutorialLi3TextGame,
+                'tutorial-li-4-text-game': texts.tutorialLi4TextGame,
+                'tutorial-li-5-text-game': texts.tutorialLi5TextGame,
+                'tutorial-li-6-text-game': texts.tutorialLi6TextGame,
+                'label-item-name-game': texts.labelItemNameGame,
+                'label-upload-cover-game': texts.labelUploadCoverGame,
+                'upload-area-span-game': texts.uploadAreaSpanGame,
+                'label-url-cover-game': texts.labelUrlCoverGame,
+                'preview-loading-text-game': texts.previewLoadingTextGame,
+                'preview-error-text-game': texts.previewErrorTextGame,
+                'add-item-btn-text-game': texts.addItemBtnTextGame,
+                'start-sorting-btn-text-game': texts.startSortingBtnTextGame,
+                'reset-all-btn-text-game': texts.resetAllBtnTextGame,
+                'back-to-home-link-game': texts.backToHomeLinkGame,
+                'compare-phase-title-game': texts.comparePhaseTitleGame,
+                'compare-phase-subtitle-game': texts.comparePhaseSubtitleGame,
+                'compare-info-prefix-game': texts.compareInfoPrefixGame,
+                'compare-info-suffix-game': texts.compareInfoSuffixGame,
+                'progress-bar-text-prefix-game': texts.progressBarTextPrefixGame,
+                'result-phase-title-game': texts.resultPhaseTitleGame,
+                'result-phase-subtitle-game': texts.resultPhaseSubtitleGame,
+                'prompt-title-text-game': texts.promptTitleTextGame,
+                'copy-btn-text-game': texts.copyBtnTextGame,
+                'restart-btn-text-game': texts.restartBtnTextGame,
+                'back-to-add-btn-text-game': texts.backToAddBtnTextGame
+            };
+
+            for (const id in elementsToTranslate) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.textContent = elementsToTranslate[id];
+                }
+            }
+
+            const gameNameInput = document.getElementById('game-name');
+            if (gameNameInput) gameNameInput.placeholder = texts.inputItemNamePlaceholderGame;
+            const coverUrlInput = document.getElementById('cover-url');
+            if (coverUrlInput) coverUrlInput.placeholder = texts.inputCoverUrlPlaceholderGame;
+
+            window.currentGameTranslations = texts;
+        }
+
+        document.addEventListener('DOMContentLoaded', applyGameTranslations);
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Global variables
@@ -1141,7 +1291,7 @@
             addGameBtn.addEventListener('click', function () {
                 const name = gameNameInput.value.trim();
                 if (!name) {
-                    alert('请输入游戏名称');
+                    alert(window.currentGameTranslations.alertEnterGameName);
                     return;
                 }
 
@@ -1179,7 +1329,7 @@
             // Start sorting
             startSortingBtn.addEventListener('click', function () {
                 if (games.length < 2) {
-                    alert('至少需要添加两个游戏才能排序');
+                    alert(window.currentGameTranslations.alertNeedTwoGames);
                     return;
                 }
 
@@ -1197,7 +1347,7 @@
 
             // Reset button
             resetBtn.addEventListener('click', function () {
-                if (confirm('确定要删除所有游戏吗？此操作不可撤销。')) {
+                if (confirm(window.currentGameTranslations.confirmResetAllGames)) {
                     games = [];
                     localStorage.removeItem('games');
                     renderGameList();
@@ -1228,7 +1378,7 @@
                 gamesList.innerHTML = '';
 
                 if (games.length === 0) {
-                    gamesList.innerHTML = '<p style="text-align:center; opacity:0.7; padding:30px;">还没有添加任何游戏</p>';
+                    gamesList.innerHTML = `<p style="text-align:center; opacity:0.7; padding:30px;">${window.currentGameTranslations.emptyGameListPlaceholder}</p>`;
                     return;
                 }
 
@@ -1351,24 +1501,28 @@
                 // 复制按钮事件
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(promptOutput.value).then(() => {
-                        const originalText = copyBtn.innerHTML;
-                        copyBtn.innerHTML = '已复制!';
+                        const originalButtonHtml = copyBtn.innerHTML;
+                        const copyTextSpan = document.getElementById('copy-btn-text-game');
+                        if(copyTextSpan) copyTextSpan.textContent = window.currentGameTranslations.copiedSuccessText.replace('!', '');
                         copyBtn.style.color = '#4caf50';
                         copyBtn.style.borderColor = '#4caf50';
                         setTimeout(() => {
-                            copyBtn.innerHTML = originalText;
+                            copyBtn.innerHTML = originalButtonHtml;
+                             const restoredCopyTextSpan = document.getElementById('copy-btn-text-game');
+                            if(restoredCopyTextSpan) restoredCopyTextSpan.textContent = window.currentGameTranslations.copyBtnTextGame.trim();
                             copyBtn.style.color = '#00c6ff';
                             copyBtn.style.borderColor = '#00c6ff';
                         }, 2000);
                     }).catch(err => {
                         console.error('复制失败: ', err);
-                        alert('复制失败，您的浏览器可能不支持此功能。');
+                        alert(window.currentGameTranslations.alertCopyFailed);
                     });
                 });
                 // --- 添加以下内容 ---
                 // 生成评价文本
                 const rankingText = sortedGames.map((game, index) => `${index + 1}. ${game.name}`).join('\n');
-                const promptText = `你现在是一个精通acg领域的雌小鬼。我给自己喜欢的游戏进行了一个排行，你来进行评价：\n${rankingText}`;
+                const promptTemplate = window.currentGameTranslations.promptRequestReviewGameTemplate;
+                const promptText = promptTemplate.replace('{ranking}', rankingText);
                 promptOutput.value = promptText;
             }
         });

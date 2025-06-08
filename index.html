@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -121,26 +121,76 @@
 
 <body>
     <div class="main-container">
-        <h1>欢迎来到 ACGN 排行系统</h1>
-        <p class="subtitle">请选择您想要进行排序的类别</p>
+        <h1 id="main-title">欢迎来到 ACGN 排行系统</h1>
+        <p class="subtitle" id="subtitle-text">请选择您想要进行排序的类别</p>
         <div class="selection-container">
             <a href="characters.html" class="selection-card">
                 <i class="fas fa-user-friends icon-character"></i>
-                <h2>角色排序系统</h2>
-                <p>添加你喜爱的角色，通过两两比较得出最终排名。</p>
+                <h2 id="char-sort-title">角色排序系统</h2>
+                <p id="char-sort-desc">添加你喜爱的角色，通过两两比较得出最终排名。</p>
             </a>
             <a href="games.html" class="selection-card">
                 <i class="fas fa-gamepad icon-game"></i>
-                <h2>游戏排序系统</h2>
-                <p>添加你喜爱的游戏，通过两两比较得出最终排名。</p>
+                <h2 id="game-sort-title">游戏排序系统</h2>
+                <p id="game-sort-desc">添加你喜爱的游戏，通过两两比较得出最终排名。</p>
             </a>
             <a href="acn.html" class="selection-card">
                 <i class="fas fa-book-open icon-acn"></i>
-                <h2>动画小说漫画排序</h2>
-                <p>添加你喜爱的ACN作品，通过两两比较得出最终排名。</p>
+                <h2 id="acn-sort-title">动画小说漫画排序</h2>
+                <p id="acn-sort-desc">添加你喜爱的ACN作品，通过两两比较得出最终排名。</p>
             </a>
         </div>
     </div>
+    <script>
+        const translations = {
+            'en': {
+                title: "Ranking System Home",
+                mainTitle: "Welcome to the ACGN Ranking System",
+                subtitleText: "Please select the category you want to sort",
+                charSortTitle: "Character Sorting System",
+                charSortDesc: "Add your favorite characters and rank them through pairwise comparisons.",
+                gameSortTitle: "Game Sorting System",
+                gameSortDesc: "Add your favorite games and rank them through pairwise comparisons.",
+                acnSortTitle: "ACN Sorting",
+                acnSortDesc: "Add your favorite ACN works and rank them through pairwise comparisons."
+            },
+            'zh': {
+                title: "排行系统首页",
+                mainTitle: "欢迎来到 ACGN 排行系统",
+                subtitleText: "请选择您想要进行排序的类别",
+                charSortTitle: "角色排序系统",
+                charSortDesc: "添加你喜爱的角色，通过两两比较得出最终排名。",
+                gameSortTitle: "游戏排序系统",
+                gameSortDesc: "添加你喜爱的游戏，通过两两比较得出最终排名。",
+                acnSortTitle: "动画小说漫画排序",
+                acnSortDesc: "添加你喜爱的ACN作品，通过两两比较得出最终排名。"
+            }
+        };
+
+        function setLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            let lang = 'en'; // Default to English
+            if (userLang.startsWith('zh')) {
+                lang = 'zh';
+            }
+
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+            const currentTranslations = translations[lang];
+
+            document.title = currentTranslations.title;
+            document.getElementById('main-title').textContent = currentTranslations.mainTitle;
+            document.getElementById('subtitle-text').textContent = currentTranslations.subtitleText;
+            document.getElementById('char-sort-title').textContent = currentTranslations.charSortTitle;
+            document.getElementById('char-sort-desc').textContent = currentTranslations.charSortDesc;
+            document.getElementById('game-sort-title').textContent = currentTranslations.gameSortTitle;
+            document.getElementById('game-sort-desc').textContent = currentTranslations.gameSortDesc;
+            document.getElementById('acn-sort-title').textContent = currentTranslations.acnSortTitle;
+            document.getElementById('acn-sort-desc').textContent = currentTranslations.acnSortDesc;
+        }
+
+        document.addEventListener('DOMContentLoaded', setLanguage);
+    </script>
 </body>
 
 </html>
