@@ -1,6 +1,6 @@
 [English Version](./README.en.md)
 
-# 角色与游戏排序系统
+# ACGN 排序系统
 一个旨在帮你理清个人偏好，为喜爱的事物建立清晰排行的网页工具。
 
 链接：[ACGN排行系统](https://elflare.github.io/ACGN-Sorter/)

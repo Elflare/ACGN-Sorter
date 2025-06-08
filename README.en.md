@@ -1,6 +1,6 @@
 [中文版](./README.md)
 
-# Character & Game Sorting System
+# ACGN Sorting System
 
 A web tool designed to help you clarify your personal preferences and build clear rankings for your favorite things.
 
