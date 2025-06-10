@@ -16,18 +16,20 @@ The system consists of three independent modules:
 
 ## Core Features
 
-- **Free Item Addition**: Enter names and upload images (from local or URL) for each entry (e.g., character avatars, game covers).
-- **Visual Card Management**: All items are displayed as cards, allowing easy addition, removal, and management.
-- **Pairwise Sorting**: Using an insertion sort logic, the system prompts you with simple “A or B” choices to rank your entries one by one.
-- **Dynamic Progress Bar**: Real-time updates on total comparisons, current progress, and completion percentage during sorting.
-- **Final Ranking Generation**: After all comparisons, a final ranked list is generated. Top items are highlighted in gold, silver, and bronze.
-- **Local Data Storage**: All items and progress are saved in your browser’s `localStorage`, so your data persists even if you refresh or close the page.
-- **Convenient Reset and Edit**: You can clear all data with one click or go back to adjust your list at any time.
+- **Free Item Addition**: You can enter names and upload images from local files or via URL for each item (e.g., character avatars, game covers).
+- **Visual Card Management**: All added items are displayed as a card wall, making it easy to add, delete, and manage them at any time.
+- **Elo Rating System**: After clicking "Start Sorting," the system will randomly present two items for you to compare. After each comparison, the system updates the scores of both items based on the Elo rating algorithm, with higher-scoring items ranking higher.
+- **Real-time Ranking**: During the sorting process, scores and rankings are updated in real-time based on Elo scores, giving you a clear understanding of the progress.
+- **Generate Final Rankings at Any Time** : You can click the button to end the competition at any moment and view the complete current rankings.
+- **Local Data Storage & Import/Export**: All items, scores, and sorting progress are saved in the browser's local storage for easy continuation next time. It also supports exporting Characters and Works list as a file for backup or migration, and importing data from a file.
+- **Convenient Reset and Modification**: You can clear all data with a single click or go back to modify the information of added items at any time.
+- **AI Personalized Commentary**: After the final ranking is generated, the system provides an **AI Review** module. It will automatically generate a guiding text based on your ranking results, which you can copy and send to a large language AI model (such as ChatGPT, Claude, etc.) for personalized commentary.
 
-## New Feature: AI Personalized Commentary
-
-After the final ranking is generated, the **AI Review** module provides an auto-generated comment based on your results. You can copy this formatted text and send it to an AI chatbot for a personalized review.
-
+## Update Log
+### June 10, 2025
+- Separated HTML, CSS, and JS files.
+- Implemented the Elo rating system.
+- Added import/export functionality.
 ---
 
 by Gemini 2.5 pro
