@@ -26,7 +26,7 @@ The system consists of three independent modules:
 
 ## New Feature: AI Personalized Commentary
 
-After the final ranking is generated, the **AI Review** module provides an auto-generated comment based on your results. You can copy this formatted text and send it to an AI chatbot (like ChatGPT or Gemini) for a personalized review.
+After the final ranking is generated, the **AI Review** module provides an auto-generated comment based on your results. You can copy this formatted text and send it to an AI chatbot for a personalized review.
 
 ---
 
