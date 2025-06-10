@@ -35,7 +35,7 @@ const charI18nData = {
         resultPhaseSubtitleChar: "Based on your selections, here is the character preference ranking",
         promptTitleTextChar: "Request Review (Copy and send to AI)",
         copyBtnTextChar: " Copy",
-        restartBtnTextChar: "Restart",
+        restartBtnTextChar: "Continue sorting",
         backToAddBtnTextChar: "Back to Modify",
         // Dynamic texts (will require JS modification to use)
         alertEnterCharacterName: "Please enter the character name",
@@ -94,7 +94,7 @@ const charI18nData = {
         resultPhaseSubtitleChar: "根据你的选择，以下是角色喜爱度排名",
         promptTitleTextChar: "请求锐评（复制并发送给 AI）",
         copyBtnTextChar: " 复制",
-        restartBtnTextChar: "重新开始",
+        restartBtnTextChar: "继续排序",
         backToAddBtnTextChar: "返回修改",
         alertEnterCharacterName: "请输入角色名称",
         alertNeedTwoCharacters: "至少需要添加两个角色才能排序",
