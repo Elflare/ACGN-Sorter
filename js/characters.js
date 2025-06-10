@@ -9,7 +9,6 @@ const charI18nData = {
         tutorialLi2TextChar: "Avatar Optional: A default icon will be used if no avatar is added.",
         tutorialLi3TextChar: "Local Storage: All data is saved in your browser and won't be lost on refresh.",
         tutorialLi4TextChar: "Sorting Phase: The system will show two characters; choose the one you prefer.",
-        tutorialLi5TextChar: "View Results: After all comparisons, the system will generate the final ranking based on Elo ratings.",
         tutorialLi6TextChar: "Elo Rating System: This system calculates the relative preference levels for items (characters, games, ACN works) by comparing them in pairs. Each item has an Elo score that updates after each comparison.",
         tutorialLi7TextChar: "Powered by DeepSeek R1 & Gemini 2.5 pro",
         labelItemNameChar: "Character Name *",
@@ -33,8 +32,11 @@ const charI18nData = {
         progressBarTextPrefixChar: "Comparison progress: ",
         resultPhaseTitleChar: "Character Sorting Results",
         resultPhaseSubtitleChar: "Based on your selections, here is the character preference ranking",
-        promptTitleTextChar: "Request Review (Copy and send to AI)",
-        copyBtnTextChar: " Copy",
+        reviewSectionTitleChar: "AI Review Prompts", // Changed from promptTitleTextChar
+        sharpReviewBtnTextChar: "Sharp Review",
+        seriousReviewBtnTextChar: "Serious Review",
+        copyToAiTextChar: "(Copy and send to AI)",
+        copyBtnTextChar: " Copy", // Kept for now, but new buttons will have their own text
         restartBtnTextChar: "Continue sorting",
         backToAddBtnTextChar: "Back to Modify",
         // Dynamic texts (will require JS modification to use)
@@ -47,6 +49,7 @@ const charI18nData = {
         copiedSuccessText: "Copied!",
         emptyCharacterListPlaceholder: "No characters added yet",
         promptRequestReviewCharTemplate: "You are now a tsundere girl who is proficient in the acg field. I have ranked my favorite characters. Please review them:\n{ranking}",
+        promptRequestSeriousReviewCharTemplate: "You are now an ACG enthusiast. I have ranked my favorite characters. Please provide a detailed review:\n{ranking}",
         continueSortingBtnTextChar: "Continue Last Sort",
         stopSortingBtnTextChar: "Stop Sorting & View Results",
         saveProgressBtnTextChar: "Save Progress",
@@ -68,7 +71,6 @@ const charI18nData = {
         tutorialLi2TextChar: "头像可选：不添加头像将使用默认图标",
         tutorialLi3TextChar: "本地存储：所有数据保存在浏览器中，刷新页面不会丢失",
         tutorialLi4TextChar: "排序阶段：系统会展示两个角色，选择你更喜欢的角色",
-        tutorialLi5TextChar: "查看结果：完成所有比较后，系统会根据 Elo 等级分生成最终排名",
         tutorialLi6TextChar: "Elo等级分系统：本系统通过两两对比来计算项目（角色、游戏、ACN作品）的相对喜好程度。每个项目都有一个 Elo 分数，该分数在每次比较后更新。",
         tutorialLi7TextChar: "Powered by DeepSeek R1 & Gemini 2.5 pro",
         labelItemNameChar: "角色名称 *",
@@ -92,8 +94,11 @@ const charI18nData = {
         progressBarTextPrefixChar: "比较进度: ",
         resultPhaseTitleChar: "角色排序结果",
         resultPhaseSubtitleChar: "根据你的选择，以下是角色喜爱度排名",
-        promptTitleTextChar: "请求锐评（复制并发送给 AI）",
-        copyBtnTextChar: " 复制",
+        reviewSectionTitleChar: "AI 评价提示", // Changed from promptTitleTextChar
+        sharpReviewBtnTextChar: "请求锐评",
+        seriousReviewBtnTextChar: "正经评论",
+        copyToAiTextChar: "（复制并发送给 AI）",
+        copyBtnTextChar: " 复制", // Kept for now, but new buttons will have their own text
         restartBtnTextChar: "继续排序",
         backToAddBtnTextChar: "返回修改",
         alertEnterCharacterName: "请输入角色名称",
@@ -105,6 +110,7 @@ const charI18nData = {
         copiedSuccessText: "已复制!",
         emptyCharacterListPlaceholder: "还没有添加任何角色",
         promptRequestReviewCharTemplate: "你现在是一个精通acg领域的雌小鬼。我给自己喜欢的角色进行了一个排行，你来进行评价：\n{ranking}",
+        promptRequestSeriousReviewCharTemplate: "你现在是一个精通acg领域的爱好者。我给自己喜欢的角色进行了一个排行，你来进行详细评价：\n{ranking}",
         continueSortingBtnTextChar: "继续上次排序",
         stopSortingBtnTextChar: "停止排序并查看结果",
         saveProgressBtnTextChar: "保存进度",
@@ -136,7 +142,6 @@ function applyCharTranslations() {
         'tutorial-li-2-text-char': texts.tutorialLi2TextChar,
         'tutorial-li-3-text-char': texts.tutorialLi3TextChar,
         'tutorial-li-4-text-char': texts.tutorialLi4TextChar,
-        'tutorial-li-5-text-char': texts.tutorialLi5TextChar,
         'tutorial-li-6-text-char': texts.tutorialLi6TextChar,
         'tutorial-li-7-text-char': texts.tutorialLi7TextChar,
         'label-item-name-char': texts.labelItemNameChar,
@@ -158,8 +163,8 @@ function applyCharTranslations() {
         'progress-bar-text-prefix-char': texts.progressBarTextPrefixChar,
         'result-phase-title-char': texts.resultPhaseTitleChar,
         'result-phase-subtitle-char': texts.resultPhaseSubtitleChar,
-        'prompt-title-text-char': texts.promptTitleTextChar,
-        'copy-btn-text-char': texts.copyBtnTextChar,
+        'prompt-title-text-char': texts.reviewSectionTitleChar, // Updated to use new key
+        // 'copy-btn-text-char': texts.copyBtnTextChar, // Will be handled dynamically for new buttons
         'restart-btn-text-char': texts.restartBtnTextChar,
         'back-to-add-btn-text-char': texts.backToAddBtnTextChar,
         // New elements for translation
@@ -183,6 +188,7 @@ function applyCharTranslations() {
     if (avatarUrlInput) avatarUrlInput.placeholder = texts.inputAvatarUrlPlaceholderChar;
 
     window.currentCharTranslations = texts; // Store for main script if needed
+    window.currentLang = lang; // Store current language globally
 }
 
 document.addEventListener('DOMContentLoaded', applyCharTranslations);
@@ -230,8 +236,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlPreviewImage = document.getElementById('url-preview-image');
     const previewLoading = document.getElementById('preview-loading');
     const previewError = document.getElementById('preview-error');
-    const promptOutput = document.getElementById('prompt-output');
-    const copyBtn = document.getElementById('copy-btn');
+    // const promptOutput = document.getElementById('prompt-output'); // Will be removed/replaced
+    // const copyBtn = document.getElementById('copy-btn'); // Will be removed/replaced
     const importJsonInput = document.getElementById('import-json-input');
     const importJsonBtn = document.getElementById('import-json-btn');
     const exportJsonBtn = document.getElementById('export-json-btn');
@@ -898,40 +904,107 @@ document.addEventListener('DOMContentLoaded', function () {
 
             rankingList.appendChild(item);
         });
-        // 复制按钮事件
-        copyBtn.addEventListener('click', () => { // Ensure this listener is added only once or is idempotent
-            if (!promptOutput.value) return;
-            navigator.clipboard.writeText(promptOutput.value).then(() => {
-                const originalButtonHtml = copyBtn.innerHTML; // Save current HTML
-                const copyTextSpan = copyBtn.querySelector('span'); // Assuming there's a span for text
-                if (copyTextSpan) copyTextSpan.textContent = window.currentCharTranslations.copiedSuccessText.replace('!', '');
-                else copyBtn.innerHTML = `<i class="fas fa-check"></i> ${window.currentCharTranslations.copiedSuccessText}`;
 
-                copyBtn.style.color = '#4caf50';
-                copyBtn.style.borderColor = '#4caf50';
+        // --- New AI Review Prompt Section ---
+        const promptContainer = document.getElementById('prompt-output-container') || document.createElement('div');
+        if (!document.getElementById('prompt-output-container')) {
+            promptContainer.id = 'prompt-output-container';
+            promptContainer.className = 'prompt-output-container'; // Add class for styling if needed
+            // Try to insert it after rankingList or at a sensible place in resultPhase
+            const resultControls = resultPhase.querySelector('.result-controls'); // Assuming .result-controls holds restart/back buttons
+            if (resultControls) {
+                resultPhase.insertBefore(promptContainer, resultControls);
+            } else {
+                resultPhase.appendChild(promptContainer);
+            }
+        }
+        promptContainer.innerHTML = ''; // Clear previous content (e.g., old textarea and button)
+
+        // Add title for the AI review section (if it's not already part of HTML structure)
+        // Assuming the H3 with id 'prompt-title-text-char' is still in characters.html and updated by applyCharTranslations
+        // If not, create it:
+        // const reviewTitle = document.createElement('h3');
+        // reviewTitle.id = 'prompt-title-text-char'; // Ensure this ID matches what applyCharTranslations expects
+        // reviewTitle.textContent = window.currentCharTranslations.reviewSectionTitleChar;
+        // promptContainer.appendChild(reviewTitle);
+
+
+        const buttonsGroup = document.createElement('div');
+        buttonsGroup.className = 'review-buttons-group'; // For styling
+
+        const sharpReviewBtn = document.createElement('button');
+        sharpReviewBtn.id = 'sharp-review-btn';
+        sharpReviewBtn.className = 'btn btn-primary'; // Or your preferred class
+        sharpReviewBtn.innerHTML = `<i class="fas fa-bolt"></i> <span>${window.currentCharTranslations.sharpReviewBtnTextChar}</span>`;
+
+        const seriousReviewBtn = document.createElement('button');
+        seriousReviewBtn.id = 'serious-review-btn';
+        seriousReviewBtn.className = 'btn btn-secondary'; // Or your preferred class
+        seriousReviewBtn.innerHTML = `<i class="fas fa-comment-dots"></i> <span>${window.currentCharTranslations.seriousReviewBtnTextChar}</span>`;
+
+        const copyToAiSpan = document.createElement('span');
+        copyToAiSpan.id = 'copy-to-ai-text-char';
+        copyToAiSpan.className = 'copy-to-ai-text'; // For styling
+        copyToAiSpan.textContent = ` ${window.currentCharTranslations.copyToAiTextChar}`; // Add leading space
+
+        buttonsGroup.appendChild(sharpReviewBtn);
+        buttonsGroup.appendChild(seriousReviewBtn);
+        buttonsGroup.appendChild(copyToAiSpan);
+        promptContainer.appendChild(buttonsGroup);
+
+        const promptTextarea = document.createElement('textarea');
+        promptTextarea.id = 'prompt-output-textarea-char'; // New ID for the textarea
+        promptTextarea.readOnly = true;
+        promptTextarea.onclick = function() { this.select(); };
+        // Use window.currentLang here
+        promptTextarea.placeholder = window.currentLang === 'zh' ? '点击上方按钮生成评价提示，内容将显示在此处。' : 'Click a button above to generate the review prompt, it will be displayed here.';
+        promptContainer.appendChild(promptTextarea);
+
+
+        const rankingText = rankedChars.map((character, index) => `${index + 1}. ${character.name} (Elo: ${character.elo})`).join('\n');
+
+        function handleCopyPrompt(buttonElement, promptText, originalText, textareaElement) {
+            textareaElement.value = promptText; // Display text in textarea
+            navigator.clipboard.writeText(promptText).then(() => {
+                const textSpan = buttonElement.querySelector('span');
+                if (textSpan) textSpan.textContent = window.currentCharTranslations.copiedSuccessText.replace('!', '');
+                else buttonElement.textContent = window.currentCharTranslations.copiedSuccessText; // Fallback
+
+                const originalColor = buttonElement.style.color;
+                const originalBorderColor = buttonElement.style.borderColor;
+                buttonElement.style.color = '#4caf50';
+                buttonElement.style.borderColor = '#4caf50';
+
                 setTimeout(() => {
-                    copyBtn.innerHTML = originalButtonHtml; // Restore original HTML
-                    // Re-find span if it was part of originalButtonHtml
-                    const restoredCopyTextSpan = copyBtn.querySelector('span');
-                    if(restoredCopyTextSpan && window.currentCharTranslations.copyBtnTextChar) {
-                         restoredCopyTextSpan.textContent = window.currentCharTranslations.copyBtnTextChar.trim();
-                    } else if (window.currentCharTranslations.copyBtnTextChar) {
-                        // If no span, might need to reconstruct more carefully or ensure span exists
-                         copyBtn.innerHTML = `<i class="fas fa-copy"></i> ${window.currentCharTranslations.copyBtnTextChar.trim()}`;
-                    }
-                    copyBtn.style.color = '#ffc107'; // Restore original color
-                    copyBtn.style.borderColor = '#ffc107'; // Restore original border color
+                    if (textSpan) textSpan.textContent = originalText;
+                    else buttonElement.textContent = originalText; // Fallback
+                    buttonElement.style.color = originalColor;
+                    buttonElement.style.borderColor = originalBorderColor;
                 }, 2000);
             }).catch(err => {
                 console.error(window.currentCharTranslations.alertCopyFailed, err);
                 alert(window.currentCharTranslations.alertCopyFailed);
             });
+        }
+
+        sharpReviewBtn.addEventListener('click', () => {
+            const promptTemplate = window.currentCharTranslations.promptRequestReviewCharTemplate;
+            const promptText = promptTemplate.replace('{ranking}', rankingText);
+            const originalButtonText = window.currentCharTranslations.sharpReviewBtnTextChar;
+            handleCopyPrompt(sharpReviewBtn, promptText, originalButtonText, promptTextarea);
         });
-        // Generate evaluation text
-        const rankingText = rankedChars.map((character, index) => `${index + 1}. ${character.name} (Elo: ${character.elo})`).join('\n');
-        const promptTemplate = window.currentCharTranslations.promptRequestReviewCharTemplate;
-        const promptText = promptTemplate.replace('{ranking}', rankingText);
-        promptOutput.value = promptText;
+
+        seriousReviewBtn.addEventListener('click', () => {
+            const promptTemplate = window.currentCharTranslations.promptRequestSeriousReviewCharTemplate;
+            const promptText = promptTemplate.replace('{ranking}', rankingText);
+            const originalButtonText = window.currentCharTranslations.seriousReviewBtnTextChar;
+            handleCopyPrompt(seriousReviewBtn, promptText, originalButtonText, promptTextarea);
+        });
+
+        // Set initial content for textarea (e.g., the sharp review prompt)
+        const initialPromptTemplate = window.currentCharTranslations.promptRequestReviewCharTemplate;
+        promptTextarea.value = initialPromptTemplate.replace('{ranking}', rankingText);
+
     }
 
     // Save Progress Function

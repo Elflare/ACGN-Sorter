@@ -9,7 +9,6 @@ const gameI18nData = {
         tutorialLi2TextGame: "Cover Optional: A default icon will be used if no cover is added.",
         tutorialLi3TextGame: "Local Storage: All data is saved in your browser and won't be lost on refresh.",
         tutorialLi4TextGame: "Sorting Phase: The system will show two games; choose the one you prefer.",
-        tutorialLi5TextGame: "View Results: After all comparisons, the system will generate the final ranking based on Elo ratings.",
         tutorialLi6TextGame: "Elo Rating System: This system calculates the relative preference levels for items (characters, games, ACN works) by comparing them in pairs. Each item has an Elo score that updates after each comparison.",
         tutorialLi7TextGame: "Powered by DeepSeek R1 & Gemini 2.5 pro",
         labelItemNameGame: "Game Name *",
@@ -33,8 +32,11 @@ const gameI18nData = {
         // progressBarTextPrefixGame: "Comparison progress: ", // Removed
         resultPhaseTitleGame: "Game Sorting Results",
         resultPhaseSubtitleGame: "Based on your selections, here is the game preference ranking",
-        promptTitleTextGame: "Request Review (Copy and send to AI)",
-        copyBtnTextGame: " Copy",
+        reviewSectionTitleGame: "AI Review Prompts", // Changed from promptTitleTextGame
+        sharpReviewBtnTextGame: "Sharp Review",
+        seriousReviewBtnTextGame: "Serious Review",
+        copyToAiTextGame: "(Copy and send to AI)",
+        copyBtnTextGame: " Copy", // Kept for new buttons
         restartBtnTextGame: "Continue sorting",
         backToAddBtnTextGame: "Back to Modify",
         alertEnterGameName: "Please enter the game name",
@@ -46,6 +48,7 @@ const gameI18nData = {
         copiedSuccessText: "Copied!",
         emptyGameListPlaceholder: "No games added yet",
         promptRequestReviewGameTemplate: "You are now a tsundere girl who is proficient in the acg field. I have ranked my favorite games. Please review them:\n{ranking}",
+        promptRequestSeriousReviewGameTemplate: "You are now an ACG enthusiast. I have ranked my favorite games. Please provide a detailed review:\n{ranking}",
         // continueSortingBtnTextGame: "Continue Last Sort", // Removed
         stopSortingBtnTextGame: "Stop Sorting & View Results",
         // saveProgressBtnTextGame: "Save Progress", // Removed
@@ -67,7 +70,6 @@ const gameI18nData = {
         tutorialLi2TextGame: "封面可选：不添加封面将使用默认图标",
         tutorialLi3TextGame: "本地存储：所有数据保存在浏览器中，刷新页面不会丢失",
         tutorialLi4TextGame: "排序阶段：系统会展示两个游戏，选择你更喜欢的游戏",
-        tutorialLi5TextGame: "查看结果：完成所有比较后，系统会根据 Elo 等级分生成最终排名",
         tutorialLi6TextGame: "Elo等级分系统：本系统通过两两对比来计算项目（角色、游戏、ACN作品）的相对喜好程度。每个项目都有一个 Elo 分数，该分数在每次比较后更新。",
         tutorialLi7TextGame: "Powered by DeepSeek R1 & Gemini 2.5 pro",
         labelItemNameGame: "游戏名称 *",
@@ -91,8 +93,11 @@ const gameI18nData = {
         // progressBarTextPrefixGame: "比较进度: ", // Removed
         resultPhaseTitleGame: "游戏排序结果",
         resultPhaseSubtitleGame: "根据你的选择，以下是游戏喜爱度排名",
-        promptTitleTextGame: "请求锐评（复制并发送给 AI）",
-        copyBtnTextGame: " 复制",
+        reviewSectionTitleGame: "AI 评价提示", // Changed from promptTitleTextGame
+        sharpReviewBtnTextGame: "请求锐评",
+        seriousReviewBtnTextGame: "正经评论",
+        copyToAiTextGame: "（复制并发送给 AI）",
+        copyBtnTextGame: " 复制", // Kept for new buttons
         restartBtnTextGame: "继续排序",
         backToAddBtnTextGame: "返回修改",
         alertEnterGameName: "请输入游戏名称",
@@ -104,6 +109,7 @@ const gameI18nData = {
         copiedSuccessText: "已复制!",
         emptyGameListPlaceholder: "还没有添加任何游戏",
         promptRequestReviewGameTemplate: "你现在是一个精通acg领域的雌小鬼。我给自己喜欢的游戏进行了一个排行，你来进行评价：\n{ranking}",
+        promptRequestSeriousReviewGameTemplate: "你现在是一个精通acg领域的爱好者。我给自己喜欢的游戏进行了一个排行，你来进行详细评价：\n{ranking}",
         // continueSortingBtnTextGame: "继续上次排序", // Removed
         stopSortingBtnTextGame: "停止排序并查看结果",
         // saveProgressBtnTextGame: "保存进度", // Removed
@@ -134,7 +140,6 @@ function applyGameTranslations() {
         'tutorial-li-2-text-game': texts.tutorialLi2TextGame,
         'tutorial-li-3-text-game': texts.tutorialLi3TextGame,
         'tutorial-li-4-text-game': texts.tutorialLi4TextGame,
-        'tutorial-li-5-text-game': texts.tutorialLi5TextGame,
         'tutorial-li-6-text-game': texts.tutorialLi6TextGame,
         'tutorial-li-7-text-game': texts.tutorialLi7TextGame,
         'label-item-name-game': texts.labelItemNameGame,
@@ -157,8 +162,8 @@ function applyGameTranslations() {
         // 'progress-bar-text-prefix-game': texts.progressBarTextPrefixGame, // Removed
         'result-phase-title-game': texts.resultPhaseTitleGame,
         'result-phase-subtitle-game': texts.resultPhaseSubtitleGame,
-        'prompt-title-text-game': texts.promptTitleTextGame,
-        'copy-btn-text-game': texts.copyBtnTextGame,
+        'prompt-title-text-game': texts.reviewSectionTitleGame, // Updated key
+        // 'copy-btn-text-game': texts.copyBtnTextGame, // Will be part of dynamic buttons
         'restart-btn-text-game': texts.restartBtnTextGame,
         'back-to-add-btn-text-game': texts.backToAddBtnTextGame,
         // 'continue-sorting-btn-text-game': texts.continueSortingBtnTextGame, // Removed
@@ -180,6 +185,7 @@ function applyGameTranslations() {
     if (coverUrlInput) coverUrlInput.placeholder = texts.inputCoverUrlPlaceholderGame;
 
     window.currentGameTranslations = texts;
+    window.currentLang = lang; // Store current language globally
 }
 
 document.addEventListener('DOMContentLoaded', applyGameTranslations);
@@ -227,8 +233,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlPreviewImage = document.getElementById('url-preview-image');
     const previewLoading = document.getElementById('preview-loading');
     const previewError = document.getElementById('preview-error');
-    const promptOutput = document.getElementById('prompt-output');
-    const copyBtn = document.getElementById('copy-btn');
+    // const promptOutput = document.getElementById('prompt-output'); // To be replaced
+    // const copyBtn = document.getElementById('copy-btn'); // To be replaced
     const importJsonInputGame = document.getElementById('import-json-input-game'); // Assuming this ID exists or was intended
     const importJsonBtnGame = document.getElementById('import-json-btn'); // Corrected to match HTML
     const exportJsonBtnGame = document.getElementById('export-json-btn'); // Corrected to match HTML
@@ -769,34 +775,95 @@ document.addEventListener('DOMContentLoaded', function () {
             rankingList.appendChild(li);
         });
 
-        copyBtn.addEventListener('click', () => {
-            if (!promptOutput.value) return;
-            navigator.clipboard.writeText(promptOutput.value).then(() => {
-                const originalButtonHtml = copyBtn.innerHTML;
-                const copyTextSpan = copyBtn.querySelector('span'); // More robust way to get the span
-                if (copyTextSpan) copyTextSpan.textContent = window.currentGameTranslations.copiedSuccessText.replace('!', '');
-                else copyBtn.innerHTML = `<i class="fas fa-check"></i> ${window.currentGameTranslations.copiedSuccessText}`;
-                copyBtn.style.color = '#4caf50';
-                copyBtn.style.borderColor = '#4caf50';
+        const lang = (navigator.language || navigator.userLanguage).startsWith('zh') ? 'zh' : 'en';
+
+        // --- New AI Review Prompt Section for Games ---
+        const promptContainer = document.getElementById('prompt-output-container-game') || document.createElement('div'); // Use specific ID
+        if (!document.getElementById('prompt-output-container-game')) {
+            promptContainer.id = 'prompt-output-container-game';
+            promptContainer.className = 'prompt-output-container'; // Re-use class if styles are shared
+            const resultControls = resultPhase.querySelector('.result-controls'); // Assuming .result-controls holds restart/back buttons
+            if (resultControls) {
+                resultPhase.insertBefore(promptContainer, resultControls);
+            } else {
+                resultPhase.appendChild(promptContainer);
+            }
+        }
+        promptContainer.innerHTML = ''; // Clear previous content
+
+        const buttonsGroup = document.createElement('div');
+        buttonsGroup.className = 'review-buttons-group';
+
+        const sharpReviewBtn = document.createElement('button');
+        sharpReviewBtn.id = 'sharp-review-btn-game';
+        sharpReviewBtn.className = 'btn btn-primary';
+        sharpReviewBtn.innerHTML = `<i class="fas fa-bolt"></i> <span>${window.currentGameTranslations.sharpReviewBtnTextGame}</span>`;
+
+        const seriousReviewBtn = document.createElement('button');
+        seriousReviewBtn.id = 'serious-review-btn-game';
+        seriousReviewBtn.className = 'btn btn-secondary';
+        seriousReviewBtn.innerHTML = `<i class="fas fa-comment-dots"></i> <span>${window.currentGameTranslations.seriousReviewBtnTextGame}</span>`;
+
+        const copyToAiSpan = document.createElement('span');
+        copyToAiSpan.className = 'copy-to-ai-text';
+        copyToAiSpan.textContent = ` ${window.currentGameTranslations.copyToAiTextGame}`;
+
+        buttonsGroup.appendChild(sharpReviewBtn);
+        buttonsGroup.appendChild(seriousReviewBtn);
+        buttonsGroup.appendChild(copyToAiSpan);
+        promptContainer.appendChild(buttonsGroup);
+
+        const promptTextarea = document.createElement('textarea');
+        promptTextarea.id = 'prompt-output-textarea-game'; // Specific ID
+        promptTextarea.readOnly = true;
+        promptTextarea.onclick = function() { this.select(); };
+        // Use window.currentLang here
+        promptTextarea.placeholder = window.currentLang === 'zh' ? '点击上方按钮生成评价提示，内容将显示在此处。' : 'Click a button above to generate the review prompt, it will be displayed here.';
+        promptContainer.appendChild(promptTextarea);
+
+        const rankingText = rankedGames.map((game, index) => `${index + 1}. ${game.name} (Elo: ${game.elo})`).join('\n');
+
+        function handleCopyPromptGame(buttonElement, promptText, originalText, textareaElement) {
+            textareaElement.value = promptText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const textSpan = buttonElement.querySelector('span');
+                if (textSpan) textSpan.textContent = window.currentGameTranslations.copiedSuccessText.replace('!', '');
+                else buttonElement.textContent = window.currentGameTranslations.copiedSuccessText;
+
+                const originalColor = buttonElement.style.color;
+                const originalBorderColor = buttonElement.style.borderColor;
+                buttonElement.style.color = '#4caf50';
+                buttonElement.style.borderColor = '#4caf50';
+
                 setTimeout(() => {
-                    copyBtn.innerHTML = originalButtonHtml;
-                    const restoredCopyTextSpan = copyBtn.querySelector('span');
-                     if(restoredCopyTextSpan && window.currentGameTranslations.copyBtnTextGame) {
-                         restoredCopyTextSpan.textContent = window.currentGameTranslations.copyBtnTextGame.trim();
-                    } else if (window.currentGameTranslations.copyBtnTextGame) {
-                         copyBtn.innerHTML = `<i class="fas fa-copy"></i> ${window.currentGameTranslations.copyBtnTextGame.trim()}`;
-                    }
-                    copyBtn.style.color = '#00c6ff';
-                    copyBtn.style.borderColor = '#00c6ff';
+                    if (textSpan) textSpan.textContent = originalText;
+                    else buttonElement.textContent = originalText;
+                    buttonElement.style.color = originalColor;
+                    buttonElement.style.borderColor = originalBorderColor;
                 }, 2000);
             }).catch(err => {
                 console.error(window.currentGameTranslations.alertCopyFailed, err);
                 alert(window.currentGameTranslations.alertCopyFailed);
             });
+        }
+
+        sharpReviewBtn.addEventListener('click', () => {
+            const promptTemplate = window.currentGameTranslations.promptRequestReviewGameTemplate;
+            const promptText = promptTemplate.replace('{ranking}', rankingText);
+            const originalButtonText = window.currentGameTranslations.sharpReviewBtnTextGame;
+            handleCopyPromptGame(sharpReviewBtn, promptText, originalButtonText, promptTextarea);
         });
-        const rankingText = rankedGames.map((game, index) => `${index + 1}. ${game.name} (Elo: ${game.elo})`).join('\n');
-        const promptTemplate = window.currentGameTranslations.promptRequestReviewGameTemplate;
-        promptOutput.value = promptTemplate.replace('{ranking}', rankingText);
+
+        seriousReviewBtn.addEventListener('click', () => {
+            const promptTemplate = window.currentGameTranslations.promptRequestSeriousReviewGameTemplate;
+            const promptText = promptTemplate.replace('{ranking}', rankingText);
+            const originalButtonText = window.currentGameTranslations.seriousReviewBtnTextGame;
+            handleCopyPromptGame(seriousReviewBtn, promptText, originalButtonText, promptTextarea);
+        });
+
+        // Set initial content for textarea (e.g., the sharp review prompt)
+        const initialPromptTemplate = window.currentGameTranslations.promptRequestReviewGameTemplate;
+        promptTextarea.value = initialPromptTemplate.replace('{ranking}', rankingText);
     }
 
     // saveProgressGame - REMOVED

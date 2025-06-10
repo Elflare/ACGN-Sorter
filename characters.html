@@ -24,7 +24,6 @@
                     <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-2-text-char">头像可选：不添加头像将使用默认图标</span></li>
                     <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-3-text-char">本地存储：所有数据保存在浏览器中，刷新页面不会丢失</span></li>
                     <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-4-text-char">排序阶段：系统会展示两个角色，选择你更喜欢的角色</span></li>
-                    <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-5-text-char">查看结果：完成所有比较后，系统会生成最终排名</span></li>
                     <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-6-text">Elo等级分系统：本系统通过两两对比来计算ACGN作品的相对喜好程度。每个项目都有一个 Elo 分数，该分数在每次比较后更新。</span></li>
                     <li><i class="fas fa-check-circle"></i> <span id="tutorial-li-7-text-char">Powered by DeepSeek R1 & Gemini 2.5 pro</span></li>
                 </ul>
@@ -129,15 +128,19 @@
                 <p class="results-subtitle" id="result-phase-subtitle-char">根据你的选择，以下是角色喜爱度排名</p>
 
                 <div class="ranking-list" id="ranking-list">
+                    <!-- Ranking items will be populated here by JS -->
+                </div>
 
+                <!-- New AI Review Prompt Section Container -->
+                <div class="prompt-section">
+                    <h3 id="prompt-title-text-char">AI 评价提示</h3>
+                    <div id="prompt-output-container">
+                        <!-- Buttons and text will be populated here by JS -->
+                    </div>
                 </div>
-                <div class="prompt-container">
-                    <h3><span id="prompt-title-text-char">请求锐评（复制并发送给 AI）</span><button id="copy-btn" class="copy-btn"><i class="fas fa-copy"></i> <span id="copy-btn-text-char">复制</span></button>
-                    </h3>
-                    <textarea id="prompt-output" readonly onclick="this.select();"></textarea>
-                </div>
-                <div class="actions">
-                    <button id="restart-btn" class="btn primary-btn"><span id="restart-btn-text-char">重新开始</span></button>
+
+                <div class="result-controls actions"> <!-- Added result-controls class for JS to find -->
+                    <button id="restart-btn" class="btn primary-btn"><span id="restart-btn-text-char">继续排序</span></button>
                     <button id="back-to-add-btn" class="btn secondary-btn"><span id="back-to-add-btn-text-char">返回修改</span></button>
                 </div>
             </div>

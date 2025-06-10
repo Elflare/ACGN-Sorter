@@ -9,7 +9,6 @@ const i18nData = {
         tutorialLi2Text: "Cover Optional: A default icon will be used if no cover is added.",
         tutorialLi3Text: "Local Storage: All data is saved in your browser and won't be lost on refresh.",
         tutorialLi4Text: "Sorting Phase: The system will show two works; choose the one you prefer.",
-        tutorialLi5Text: "View Results: After all comparisons, the system will generate the final ranking based on Elo ratings.",
         tutorialLi6Text: "Elo Rating System: This system calculates the relative preference levels for items (characters, games, ACN works) by comparing them in pairs. Each item has an Elo score that updates after each comparison.",
         tutorialLi7Text: "Powered by DeepSeek R1 & Gemini 2.5 pro",
         labelItemName: "Work Name *",
@@ -34,8 +33,11 @@ const i18nData = {
         // progressBarTextPrefix: "Comparison progress: ", // Removed
         resultPhaseTitle: "Work Sorting Results",
         resultPhaseSubtitle: "Based on your selections, here is the work preference ranking",
-        promptTitleText: "Request Review (Copy and send to AI)",
-        copyBtnText: " Copy",
+        reviewSectionTitleAcn: "AI Review Prompts", // Changed from promptTitleText
+        sharpReviewBtnTextAcn: "Sharp Review",
+        seriousReviewBtnTextAcn: "Serious Review",
+        copyToAiTextAcn: "(Copy and send to AI)",
+        copyBtnText: " Copy", // Kept for new buttons
         restartBtnText: "Continue sorting",
         backToAddBtnText: "Back to Modify",
         alertEnterWorkName: "Please enter the work name",
@@ -49,6 +51,7 @@ const i18nData = {
         copiedSuccessText: "Copied!",
         emptyListPlaceholder: "No works added yet",
         promptRequestReviewTemplate: "You are now a tsundere girl who is proficient in the acg field. I have ranked my favorite anime, comics, and novels. Please review them:\n{ranking}",
+        promptRequestSeriousReviewAcnTemplate: "You are now an ACG enthusiast. I have ranked my favorite ACN works. Please provide a detailed review:\n{ranking}",
         // continueSortingBtnTextAcn: "Continue Last Sort", // Removed
         stopSortingBtnTextAcn: "Stop Sorting & View Results",
         // saveProgressBtnTextAcn: "Save Progress", // Removed
@@ -67,7 +70,6 @@ const i18nData = {
         tutorialLi2Text: "封面可选：不添加封面将使用默认图标",
         tutorialLi3Text: "本地存储：所有数据保存在浏览器中，刷新页面不会丢失",
         tutorialLi4Text: "排序阶段：系统会展示两个作品，选择你更喜欢的作品",
-        tutorialLi5Text: "查看结果：完成所有比较后，系统会根据 Elo 等级分生成最终排名",
         tutorialLi6Text: "Elo等级分系统：本系统通过两两对比来计算项目（角色、游戏、ACN作品）的相对喜好程度。每个项目都有一个 Elo 分数，该分数在每次比较后更新。",
         tutorialLi7Text: "Powered by DeepSeek R1 & Gemini 2.5 pro",
         labelItemName: "作品名称 *",
@@ -92,8 +94,11 @@ const i18nData = {
         // progressBarTextPrefix: "比较进度: ", // Removed
         resultPhaseTitle: "作品排序结果",
         resultPhaseSubtitle: "根据你的选择，以下是作品喜爱度排名",
-        promptTitleText: "请求锐评（复制并发送给 AI）",
-        copyBtnText: " 复制",
+        reviewSectionTitleAcn: "AI 评价提示", // Changed from promptTitleText
+        sharpReviewBtnTextAcn: "请求锐评",
+        seriousReviewBtnTextAcn: "正经评论",
+        copyToAiTextAcn: "（复制并发送给 AI）",
+        copyBtnText: " 复制", // Kept for new buttons
         restartBtnText: "继续排序",
         backToAddBtnText: "返回修改",
         alertEnterWorkName: "请输入作品名称",
@@ -107,6 +112,7 @@ const i18nData = {
         copiedSuccessText: "已复制!",
         emptyListPlaceholder: "还没有添加任何作品",
         promptRequestReviewTemplate: "你现在是一个精通acg领域的雌小鬼。我给自己喜欢的动画、漫画、小说进行了一个排行，你来进行评价：\n{ranking}",
+        promptRequestSeriousReviewAcnTemplate: "你现在是一个精通acg领域的爱好者。我给自己喜欢的ACN作品进行了一个排行，你来进行详细评价：\n{ranking}",
         // continueSortingBtnTextAcn: "继续上次排序", // Removed
         stopSortingBtnTextAcn: "停止排序并查看结果",
         // saveProgressBtnTextAcn: "保存进度", // Removed
@@ -134,7 +140,6 @@ function applyTranslations() {
         'tutorial-li-2-text': texts.tutorialLi2Text,
         'tutorial-li-3-text': texts.tutorialLi3Text,
         'tutorial-li-4-text': texts.tutorialLi4Text,
-        'tutorial-li-5-text': texts.tutorialLi5Text,
         'tutorial-li-6-text': texts.tutorialLi6Text,
         'tutorial-li-7-text': texts.tutorialLi7Text,
         'label-item-name': texts.labelItemName,
@@ -157,8 +162,8 @@ function applyTranslations() {
         // 'progress-bar-text-prefix': texts.progressBarTextPrefix, // Removed
         'result-phase-title': texts.resultPhaseTitle,
         'result-phase-subtitle': texts.resultPhaseSubtitle,
-        'prompt-title-text': texts.promptTitleText,
-        'copy-btn-text': texts.copyBtnText,
+        'prompt-title-text': texts.reviewSectionTitleAcn, // Updated key
+        // 'copy-btn-text': texts.copyBtnText, // Will be part of dynamic buttons
         'restart-btn-text': texts.restartBtnText,
         'back-to-add-btn-text': texts.backToAddBtnText,
         // 'continue-sorting-btn-text-acn': texts.continueSortingBtnTextAcn, // Removed
@@ -180,6 +185,7 @@ function applyTranslations() {
     if (avatarUrlInput) avatarUrlInput.placeholder = texts.inputAvatarUrlPlaceholder;
 
     window.currentTranslations = texts;
+    window.currentLang = lang; // Store current language globally
 }
 
 document.addEventListener('DOMContentLoaded', applyTranslations);
@@ -227,8 +233,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlPreviewImage = document.getElementById('url-preview-image');
     const previewLoading = document.getElementById('preview-loading');
     const previewError = document.getElementById('preview-error');
-    const promptOutput = document.getElementById('prompt-output');
-    const copyBtn = document.getElementById('copy-btn');
+    // const promptOutput = document.getElementById('prompt-output'); // To be replaced
+    // const copyBtn = document.getElementById('copy-btn'); // To be replaced
     const importJsonInputAcn = document.getElementById('import-json-input-acn'); // Assuming this ID exists or was intended
     const importJsonBtnAcn = document.getElementById('import-json-btn-acn'); // Assuming this ID exists or was intended
     const exportJsonBtnAcn = document.getElementById('export-json-btn-acn'); // Assuming this ID exists or was intended
@@ -277,13 +283,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     initAcnPage();
 
-    if(importJsonBtnAcn) { // Check if element exists
+    if (importJsonBtnAcn) { // Check if element exists
         importJsonBtnAcn.addEventListener('click', () => {
-            if(importJsonInputAcn) importJsonInputAcn.click();
+            if (importJsonInputAcn) importJsonInputAcn.click();
         });
     }
 
-    if(importJsonInputAcn) { // Check if element exists
+    if (importJsonInputAcn) { // Check if element exists
         importJsonInputAcn.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (!file) {
@@ -324,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    if(exportJsonBtnAcn) { // Check if element exists
+    if (exportJsonBtnAcn) { // Check if element exists
         exportJsonBtnAcn.addEventListener('click', () => {
             const dataToExport = items.map(item => ({ name: item.name, avatar: item.avatar, elo: item.elo })); // Added elo
             const jsonString = JSON.stringify(dataToExport, null, 2);
@@ -396,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cancelUploadBtn.style.display = 'none';
     });
 
-    avatarUrlInput.addEventListener('input', function() {
+    avatarUrlInput.addEventListener('input', function () {
         clearTimeout(debounceTimer);
         const url = avatarUrlInput.value.trim();
         if (!url) {
@@ -409,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
             previewError.style.display = 'none';
             previewLoading.style.display = 'flex';
             const tempImage = new Image();
-            tempImage.onload = function() {
+            tempImage.onload = function () {
                 urlPreviewImage.src = url;
                 urlPreviewImage.style.display = 'block';
                 previewLoading.style.display = 'none';
@@ -420,7 +426,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 avatarUploadArea.querySelector('span').style.display = 'block';
                 avatarInput.value = '';
             };
-            tempImage.onerror = function() {
+            tempImage.onerror = function () {
                 previewLoading.style.display = 'none';
                 previewError.style.display = 'flex';
                 urlPreviewImage.style.display = 'none';
@@ -478,8 +484,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         if (comparisonPairs.length === 0) {
-             alert("Error: No comparison pairs generated for ACN items.");
-             return;
+            alert("Error: No comparison pairs generated for ACN items.");
+            return;
         }
         comparisonPairs.sort(() => Math.random() - 0.5);
         currentPairIndex = 0;
@@ -497,8 +503,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // continueSortingBtnAcn - REMOVED
     // saveProgressBtnAcn - REMOVED
 
-    if(stopSortingBtnAcn) { // Check if element exists
-        stopSortingBtnAcn.addEventListener('click', function() {
+    if (stopSortingBtnAcn) { // Check if element exists
+        stopSortingBtnAcn.addEventListener('click', function () {
             isSortingInProgress = false;
             finishSortingAcn();
         });
@@ -515,8 +521,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    if(resetEloBtnAcn) { // Check if element exists
-        resetEloBtnAcn.addEventListener('click', function() {
+    if (resetEloBtnAcn) { // Check if element exists
+        resetEloBtnAcn.addEventListener('click', function () {
             if (confirm(window.currentTranslations.confirmResetEloAcn)) {
                 items.forEach(item => item.elo = 1200);
                 localStorage.setItem('acn_items', JSON.stringify(items));
@@ -530,8 +536,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    option1.addEventListener('click', () => { if(isSortingInProgress) handleComparisonChoiceAcn(0); });
-    option2.addEventListener('click', () => { if(isSortingInProgress) handleComparisonChoiceAcn(1); });
+    option1.addEventListener('click', () => { if (isSortingInProgress) handleComparisonChoiceAcn(0); });
+    option2.addEventListener('click', () => { if (isSortingInProgress) handleComparisonChoiceAcn(1); });
 
     restartBtn.addEventListener('click', function () {
         if (items.length < 2) {
@@ -606,10 +612,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (isSortingInProgress) { // Removed localStorage check
                     comparisonPairs = comparisonPairs.filter(pair => pair[0].id !== deletedItemId && pair[1].id !== deletedItemId);
                     totalComparisons = comparisonPairs.length;
-                     if (currentPairIndex >= totalComparisons && totalComparisons > 0) {
-                        currentPairIndex = totalComparisons -1;
+                    if (currentPairIndex >= totalComparisons && totalComparisons > 0) {
+                        currentPairIndex = totalComparisons - 1;
                     } else if (totalComparisons === 0) {
-                         currentPairIndex = 0;
+                        currentPairIndex = 0;
                     }
                 }
                 localStorage.setItem('acn_items', JSON.stringify(items));
@@ -626,12 +632,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function nextComparisonAcn() {
-         if (!isSortingInProgress || comparisonPairs.length === 0) {
-            if (isSortingInProgress && items.length >=2 && comparisonPairs.length === 0) {
+        if (!isSortingInProgress || comparisonPairs.length === 0) {
+            if (isSortingInProgress && items.length >= 2 && comparisonPairs.length === 0) {
                 for (let i = 0; i < items.length; i++) {
                     for (let j = i + 1; j < items.length; j++) {
-                         if (!comparisonPairs.find(p => (p[0].id === items[i].id && p[1].id === items[j].id) || (p[0].id === items[j].id && p[1].id === items[i].id) )) {
-                             comparisonPairs.push([items[i], items[j]]);
+                        if (!comparisonPairs.find(p => (p[0].id === items[i].id && p[1].id === items[j].id) || (p[0].id === items[j].id && p[1].id === items[i].id))) {
+                            comparisonPairs.push([items[i], items[j]]);
                         }
                     }
                 }
@@ -656,10 +662,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentPairIndex >= comparisonPairs.length && comparisonPairs.length > 0) {
             currentPairIndex = 0;
         }
-        if (comparisonPairs.length === 0 && items.length >=2) {
+        if (comparisonPairs.length === 0 && items.length >= 2) {
             finishSortingAcn(); return;
         }
-         if (comparisonPairs.length === 0 && items.length < 2) {
+        if (comparisonPairs.length === 0 && items.length < 2) {
             isSortingInProgress = false;
             comparePhase.classList.remove('active');
             addPhase.classList.add('active');
@@ -696,11 +702,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function handleComparisonChoiceAcn(winnerIndex) {
         if (currentPairIndex >= comparisonPairs.length) {
-             console.error("Attempted to handle choice for an invalid pair index in ACN.");
-             nextComparisonAcn(); return;
+            console.error("Attempted to handle choice for an invalid pair index in ACN.");
+            nextComparisonAcn(); return;
         }
         const [itemA, itemB] = comparisonPairs[currentPairIndex];
-         if (!itemA || itemA.elo === undefined || !itemB || itemB.elo === undefined) {
+        if (!itemA || itemA.elo === undefined || !itemB || itemB.elo === undefined) {
             console.error("Invalid ACN item data in comparison pair:", itemA, itemB);
             currentPairIndex++;
             nextComparisonAcn();
@@ -716,8 +722,8 @@ document.addEventListener('DOMContentLoaded', function () {
         itemB.elo = Math.round(eloB + K_FACTOR * (scoreB - expectedB));
         const itemAIndex = items.findIndex(i => i.id === itemA.id);
         const itemBIndex = items.findIndex(i => i.id === itemB.id);
-        if(itemAIndex !== -1) items[itemAIndex].elo = itemA.elo;
-        if(itemBIndex !== -1) items[itemBIndex].elo = itemB.elo;
+        if (itemAIndex !== -1) items[itemAIndex].elo = itemA.elo;
+        if (itemBIndex !== -1) items[itemBIndex].elo = itemB.elo;
         localStorage.setItem('acn_items', JSON.stringify(items));
         currentPairIndex++;
         renderLiveRankingPreviewAcn();
@@ -745,9 +751,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="rank">${index + 1}</div>
                 <div class="character-avatar">
                      ${item.avatar ?
-                        `<img src="${item.avatar}" alt="${item.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'default-avatar\\'><i class=\\'fas fa-book-open\\'></i></div>'">` :
-                        `<div class="default-avatar"><i class="fas fa-book-open"></i></div>`
-                    }
+                    `<img src="${item.avatar}" alt="${item.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'default-avatar\\'><i class=\\'fas fa-book-open\\'></i></div>'">` :
+                    `<div class="default-avatar"><i class="fas fa-book-open"></i></div>`
+                }
                 </div>
                 <div class="character-info">
                     <div class="name">${item.name} (Elo: ${item.elo})</div>
@@ -767,9 +773,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="rank ${rankClass}">${index + 1}</div>
                 <div class="character-avatar">
                     ${item.avatar ?
-                        `<img src="${item.avatar}" alt="${item.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'default-avatar\\'><i class=\\'fas fa-book-open\\'></i></div>'">` :
-                        `<div class="default-avatar"><i class="fas fa-book-open"></i></div>`
-                    }
+                    `<img src="${item.avatar}" alt="${item.name}" onerror="this.onerror=null; this.parentNode.innerHTML='<div class=\\'default-avatar\\'><i class=\\'fas fa-book-open\\'></i></div>'">` :
+                    `<div class="default-avatar"><i class="fas fa-book-open"></i></div>`
+                }
                 </div>
                 <div class="character-info">
                     <div class="name">${item.name} (Elo: ${item.elo})</div>
@@ -777,34 +783,96 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             rankingList.appendChild(rankingItemDiv);
         });
-        copyBtn.addEventListener('click', () => {
-            if (!promptOutput.value) return;
-            navigator.clipboard.writeText(promptOutput.value).then(() => {
-                const originalButtonHtml = copyBtn.innerHTML;
-                const copyTextSpan = copyBtn.querySelector('span');
-                if (copyTextSpan) copyTextSpan.textContent = window.currentTranslations.copiedSuccessText.replace('!', '');
-                else copyBtn.innerHTML = `<i class="fas fa-check"></i> ${window.currentTranslations.copiedSuccessText}`;
-                copyBtn.style.color = '#4caf50';
-                copyBtn.style.borderColor = '#4caf50';
+
+        const lang = (navigator.language || navigator.userLanguage).startsWith('zh') ? 'zh' : 'en';
+
+        // --- New AI Review Prompt Section for ACN ---
+        const promptContainer = document.getElementById('prompt-output-container-acn') || document.createElement('div'); // Use specific ID
+        if (!document.getElementById('prompt-output-container-acn')) {
+            promptContainer.id = 'prompt-output-container-acn';
+            promptContainer.className = 'prompt-output-container';
+            const resultControls = resultPhase.querySelector('.result-controls');
+            if (resultControls) {
+                resultPhase.insertBefore(promptContainer, resultControls);
+            } else {
+                resultPhase.appendChild(promptContainer);
+            }
+        }
+        promptContainer.innerHTML = '';
+
+        const buttonsGroup = document.createElement('div');
+        buttonsGroup.className = 'review-buttons-group';
+
+        const sharpReviewBtn = document.createElement('button');
+        sharpReviewBtn.id = 'sharp-review-btn-acn';
+        sharpReviewBtn.className = 'btn btn-primary'; // Ensure .btn-primary is styled in acn.css
+        sharpReviewBtn.innerHTML = `<i class="fas fa-bolt"></i> <span>${window.currentTranslations.sharpReviewBtnTextAcn}</span>`;
+
+        const seriousReviewBtn = document.createElement('button');
+        seriousReviewBtn.id = 'serious-review-btn-acn';
+        seriousReviewBtn.className = 'btn btn-secondary'; // Ensure .btn-secondary is styled in acn.css
+        seriousReviewBtn.innerHTML = `<i class="fas fa-comment-dots"></i> <span>${window.currentTranslations.seriousReviewBtnTextAcn}</span>`;
+
+        const copyToAiSpan = document.createElement('span');
+        copyToAiSpan.className = 'copy-to-ai-text';
+        copyToAiSpan.textContent = ` ${window.currentTranslations.copyToAiTextAcn}`;
+
+        buttonsGroup.appendChild(sharpReviewBtn);
+        buttonsGroup.appendChild(seriousReviewBtn);
+        buttonsGroup.appendChild(copyToAiSpan);
+        promptContainer.appendChild(buttonsGroup);
+
+        const promptTextarea = document.createElement('textarea');
+        promptTextarea.id = 'prompt-output-textarea-acn'; // Specific ID
+        promptTextarea.readOnly = true;
+        promptTextarea.onclick = function() { this.select(); };
+        // Use window.currentLang here
+        promptTextarea.placeholder = window.currentLang === 'zh' ? '点击上方按钮生成评价提示，内容将显示在此处。' : 'Click a button above to generate the review prompt, it will be displayed here.';
+        promptContainer.appendChild(promptTextarea);
+
+        const rankingText = rankedItems.map((item, index) => `${index + 1}. ${item.name} (Elo: ${item.elo})`).join('\n');
+
+        function handleCopyPromptAcn(buttonElement, promptText, originalText, textareaElement) {
+            textareaElement.value = promptText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                const textSpan = buttonElement.querySelector('span');
+                if (textSpan) textSpan.textContent = window.currentTranslations.copiedSuccessText.replace('!', '');
+                else buttonElement.textContent = window.currentTranslations.copiedSuccessText;
+
+                const originalColor = buttonElement.style.color;
+                const originalBorderColor = buttonElement.style.borderColor;
+                buttonElement.style.color = '#4caf50';
+                buttonElement.style.borderColor = '#4caf50';
+
                 setTimeout(() => {
-                    copyBtn.innerHTML = originalButtonHtml;
-                     const restoredCopyTextSpan = copyBtn.querySelector('span');
-                     if(restoredCopyTextSpan && window.currentTranslations.copyBtnText) {
-                         restoredCopyTextSpan.textContent = window.currentTranslations.copyBtnText.trim();
-                    } else if (window.currentTranslations.copyBtnText) {
-                         copyBtn.innerHTML = `<i class="fas fa-copy"></i> ${window.currentTranslations.copyBtnText.trim()}`;
-                    }
-                    copyBtn.style.color = '#c797d8';
-                    copyBtn.style.borderColor = '#c797d8';
+                    if (textSpan) textSpan.textContent = originalText;
+                    else buttonElement.textContent = originalText;
+                    buttonElement.style.color = originalColor;
+                    buttonElement.style.borderColor = originalBorderColor;
                 }, 2000);
             }).catch(err => {
                 console.error(window.currentTranslations.alertCopyFailed, err);
                 alert(window.currentTranslations.alertCopyFailed);
             });
+        }
+
+        sharpReviewBtn.addEventListener('click', () => {
+            const promptTemplate = window.currentTranslations.promptRequestReviewTemplate;
+            const promptText = promptTemplate.replace('{ranking}', rankingText);
+            const originalButtonText = window.currentTranslations.sharpReviewBtnTextAcn;
+            handleCopyPromptAcn(sharpReviewBtn, promptText, originalButtonText, promptTextarea);
         });
-        const rankingText = rankedItems.map((item, index) => `${index + 1}. ${item.name} (Elo: ${item.elo})`).join('\n');
-        const promptTemplate = window.currentTranslations.promptRequestReviewTemplate;
-        promptOutput.value = promptTemplate.replace('{ranking}', rankingText);
+
+        seriousReviewBtn.addEventListener('click', () => {
+            const promptTemplate = window.currentTranslations.promptRequestSeriousReviewAcnTemplate;
+            const promptText = promptTemplate.replace('{ranking}', rankingText);
+            const originalButtonText = window.currentTranslations.seriousReviewBtnTextAcn;
+            handleCopyPromptAcn(seriousReviewBtn, promptText, originalButtonText, promptTextarea);
+        });
+
+        // Set initial content for textarea
+        const initialPromptTemplate = window.currentTranslations.promptRequestReviewTemplate;
+        promptTextarea.value = initialPromptTemplate.replace('{ranking}', rankingText);
     }
 
     // saveProgressAcn - REMOVED

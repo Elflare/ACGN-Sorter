@@ -931,3 +931,116 @@ h1 {
         max-width: 90%;
     }
 }
+
+/* New AI Review Prompt Section Styles for ACN (similar to other CSS files) */
+.prompt-section {
+    max-width: 700px;
+    margin: 40px auto 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 20px 25px;
+    text-align: left;
+}
+
+.prompt-section h3 {
+    margin-bottom: 20px;
+    color: #c797d8; /* ACN theme color (light purple) */
+    text-align: center;
+}
+
+#prompt-output-container-acn { /* Specific ID for ACN page container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#prompt-output-container-acn textarea { /* Style for the new textarea */
+    width: 100%;
+    min-height: 150px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #555;
+    border-radius: 10px;
+    color: #eee;
+    padding: 15px;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: vertical;
+    margin-top: 15px;
+}
+
+#prompt-output-container-acn textarea:focus {
+    outline: none;
+    border-color: #9b59b6; /* ACN theme focus color (darker purple) */
+}
+
+#prompt-output-container-acn textarea::-webkit-scrollbar {
+    width: 10px;
+}
+
+#prompt-output-container-acn textarea::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+#prompt-output-container-acn textarea::-webkit-scrollbar-thumb {
+    background: #9b59b6; /* ACN theme scrollbar color */
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+
+#prompt-output-container-acn textarea::-webkit-scrollbar-thumb:hover {
+    background: #d252e1; /* ACN theme scrollbar hover color */
+}
+
+.review-buttons-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.review-buttons-group .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+/* Ensure ACN primary and secondary buttons use ACN theme colors */
+.review-buttons-group .btn.primary-btn { /* For ACN, primary button might need specific theme */
+    background: linear-gradient(to right, #9b59b6, #d252e1); /* ACN primary button theme */
+    box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+}
+.review-buttons-group .btn.primary-btn:hover {
+    box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+}
+/* Secondary button style is generic and should work fine */
+
+
+.copy-to-ai-text {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-left: 5px;
+}
+
+/* Responsive adjustments for the new prompt section in acn.css */
+@media (max-width: 480px) {
+    .review-buttons-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .review-buttons-group .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .copy-to-ai-text {
+        text-align: center;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
