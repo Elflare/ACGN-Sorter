@@ -21,7 +21,7 @@ const i18nData = {
         previewErrorText: "Image failed to load, please check URL",
         addItemBtnText: "Add Work",
         startSortingBtnText: "Start Sorting",
-        resetAllBtnText: "Reset All",
+        resetAllBtnText: "Clear All Works",
         resetEloBtnTextAcn: "Reset Elo Scores", // Added
         backToHomeLink: "Back to Home",
         importJsonBtnTextAcn: "Import Game List",
@@ -82,7 +82,7 @@ const i18nData = {
         previewErrorText: "图片加载失败，请检查URL",
         addItemBtnText: "添加作品",
         startSortingBtnText: "开始排序",
-        resetAllBtnText: "重置所有",
+        resetAllBtnText: "清空所有作品",
         resetEloBtnTextAcn: "重置Elo分数", // Added
         backToHomeLink: "返回首页",
         importJsonBtnTextAcn: "导入游戏列表",
