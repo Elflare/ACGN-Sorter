@@ -24,8 +24,8 @@ const i18nData = {
         resetAllBtnText: "Clear All Works",
         resetEloBtnTextAcn: "Reset Elo Scores", // Added
         backToHomeLink: "Back to Home",
-        importJsonBtnTextAcn: "Import Game List",
-        exportJsonBtnTextAcn: "Export Game List",
+        importJsonBtnTextAcn: "Import ACN List",
+        exportJsonBtnTextAcn: "Export ACN List",
         comparePhaseTitle: "Which work do you prefer?",
         comparePhaseSubtitle: "Click to select your preferred work",
         // compareInfoPrefix: "Current progress: ", // Removed
@@ -85,8 +85,8 @@ const i18nData = {
         resetAllBtnText: "清空所有作品",
         resetEloBtnTextAcn: "重置Elo分数", // Added
         backToHomeLink: "返回首页",
-        importJsonBtnTextAcn: "导入游戏列表",
-        exportJsonBtnTextAcn: "导出游戏列表",
+        importJsonBtnTextAcn: "导入作品列表",
+        exportJsonBtnTextAcn: "导出作品列表",
         comparePhaseTitle: "你更喜欢哪个作品？",
         comparePhaseSubtitle: "点击选择你更喜欢的作品",
         // compareInfoPrefix: "当前进度: ", // Removed
