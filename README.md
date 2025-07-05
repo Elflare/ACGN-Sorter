@@ -1,4 +1,4 @@
-[English Version](./README.en.md) / [日本語版](./README.ja.md)
+[English Version](./README.en.md) / [日本語版](./README.ja.md)
 
 # ACGN 排序系统
 一个旨在帮你理清个人偏好，为喜爱的事物建立清晰排行的网页工具。
