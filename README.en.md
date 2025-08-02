@@ -1,4 +1,4 @@
-[中文版](./README.md)
+[中文版](./README.md) / [日本語版](./README.ja.md)
 
 # ACGN Sorting System
 
