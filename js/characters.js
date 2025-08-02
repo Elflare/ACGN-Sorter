@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Export JSON
     exportJsonBtn.addEventListener('click', () => {
-        const dataToExport = characters.map(char => ({ name: char.name, avatar: char.avatar, elo: item.elo })); // Added elo
+        const dataToExport = characters.map(char => ({ name: char.name, avatar: char.avatar, elo: char.elo })); // Added elo
         const jsonString = JSON.stringify(dataToExport, null, 2);
         const blob = new Blob([jsonString], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
